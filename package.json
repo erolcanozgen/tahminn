@@ -1,0 +1,29 @@
+{
+  "name": "tahminn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erolcanozgen/tahminn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erolcanozgen/tahminn/issues"
+  },
+  "homepage": "https://github.com/erolcanozgen/tahminn#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "express": "^4.17.0",
+    "nodemon": "^1.19.0"
+  }
+}
