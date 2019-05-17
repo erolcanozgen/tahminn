@@ -1,32 +1,21 @@
 {
-  "name": "tahminn",
+  "name": "crae-example",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "engines": {
-    "node": "8.11.1"
-  },
+  "description": "Create-react-app with Express",
+  "main": "index.js",
   "scripts": {
-    "client-install": "npm install --prefix tahmin_app",
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix tahmin_app",
-    "dev": "concurrently \"npm run server\" \"npm run tahmin_app\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix tahmin_app && npm run build --prefix tahmin_app"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/erolcanozgen/tahminn.git"
-  },
-  "author": "",
+  "author": "Chloe Chong",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/erolcanozgen/tahminn/issues"
-  },
-  "homepage": "https://github.com/erolcanozgen/tahminn#readme",
   "dependencies": {
-    "concurrently": "^4.1.0",
-    "express": "^4.17.0",
-    "nodemon": "^1.19.0"
+    "cors": "^2.8.4",
+    "cowsay": "^1.3.1",
+    "express": "^4.16.3"
+  },
+  "engines": {
+    "node": "10.5.0"
   }
 }
