@@ -37,7 +37,7 @@ class App extends Component {
         <h3>Text Cow. Moo</h3>
         <code>{this.state.cow}</code>
         <form onSubmit={this.customCow}>
-          <label>Custom Cow Text:</label>
+          <label>Custom Cow Text Auto Deploy Trial:</label>
           <input
             type="text"
             name="text"
