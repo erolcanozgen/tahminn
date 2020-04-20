@@ -1,54 +1,30 @@
 import React, { Component } from 'react'
+import io from 'socket.io-client'
+import OAuth from './OAuth'
+import { API_URL } from './config'
 import './app.css'
+const socket = io(API_URL)
+const providers = ['google']
 
-class App extends Component {
-  state = {
-    cow: '',
-    text: ''
-  }
-
-  componentDidMount() {
-    this.fetchCow()
-  }
-
-  fetchCow = async () => {
-    const response = await fetch(`/api/cow`)
-    const initialCow = await response.json()
-    const cow = initialCow.moo
-    this.setState({ cow })
-  }
-
-  customCow = async evt => {
-    evt.preventDefault()
-    const text = this.state.text
-    const response = await fetch(`/api/cow/${text}`)
-    const custom = await response.json()
-    const cow = custom.moo
-    this.setState({ cow, text: '' })
-  }
-
-  handleChange = evt => {
-    this.setState({ [evt.target.name]: evt.target.value })
-  }
+export default class App extends Component {
 
   render() {
+    const buttons = (providers, socket) =>
+      providers.map(provider =>
+        <OAuth
+          provider={provider}
+          key={provider}
+          socket={socket}
+        />
+      )
+
     return (
-      <div className="App">
-        <h3>Text Cow. Moo</h3>
-        <code>{this.state.cow}</code>
-        <form onSubmit={this.customCow}>
-          <label>Custom Cow Text Auto Deploy Trial 2:</label>
-          <input
-            type="text"
-            name="text"
-            value={this.state.text}
-            onChange={this.handleChange}
-          />
-          <button type="submit">Show me a talking cow!</button>
-        </form>
+      <div className='wrapper'>
+        <div className='container'>
+          {buttons(providers, socket)
+          }
+        </div>
       </div>
     )
   }
 }
-
-export default App
