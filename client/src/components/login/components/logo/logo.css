@@ -1,0 +1,39 @@
+
+  .mlt-carousel {
+        background: #272262;
+        height: 600px;
+        border-radius: 12px;
+        z-index: 1;
+        box-shadow: 0px 0px 30px #808080;
+    }
+    
+    .item-content {
+        text-align: center;
+        color: #fff;
+    }
+    
+    .item-content h3 {
+        font-size: 19px;
+        font-weight: bold;
+        text-shadow: 0 0 1px #000;
+        margin: 10px 0;
+    }
+    
+    .item-content p {
+        display: block;
+        font-size: 15px;
+        color: #fff;
+        text-shadow: 0 0 1px #000;
+    }
+    
+    .item {
+        height: 600px;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    
+    .item>img {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+   
