@@ -3,19 +3,25 @@ import PropTypes from 'prop-types'
 import { API_URL } from './config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { Redirect } from "react-router-dom";
+
+
 
 export default class OAuth extends Component {
 
     state = {
-        user: {}
+        user: {},
+        isLoggedIn:false
     }
+
 
     componentDidMount() {
         const { socket, provider } = this.props
 
         socket.on(provider.name, user => {
-            this.popup.close()
-            this.setState({ user })
+            this.popup.close();
+            this.setState({ user });
+            this.setState({ isLoggedIn:true });
         })
     }
 
@@ -43,6 +49,9 @@ export default class OAuth extends Component {
     }
 
     render() {
+        if (this.state.isLoggedIn === true) {
+            return <Redirect to={{pathname:'/registration',state: { user: this.state.user }}}  />
+        }
         const { name, photo } = this.state.user
         const { provider} = this.props
         const atSymbol = provider.name === 'twitter' ? '@' : ''
@@ -68,6 +77,6 @@ export default class OAuth extends Component {
 }
 
 OAuth.propTypes = {
-    provider: PropTypes.string.isRequired,
+    provider: PropTypes.object.isRequired,
     socket: PropTypes.object.isRequired
 }
