@@ -11,7 +11,7 @@ class Login extends Component {
     return (
       <div className="container loginContainer">
         <div className="center-block">
-        <div class="row">
+        <div className="row">
             <div className="col-4 no-padding" style={{zIndex: 1}}>
               <Logo></Logo>
             </div>
