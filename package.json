@@ -2,9 +2,10 @@
   "name": "tahminn",
   "version": "1.0.0",
   "description": "A fun talking cow generator with Create-React-App and Express.",
-  "main": "index.js",
+  "main": "backend/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server"
   },
   "repository": {
     "type": "git",
