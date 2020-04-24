@@ -41,14 +41,9 @@ const io = socketio(server)
 app.set('io', io)
 
 
+app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
 app.use('/', authRouter)
-
-
-app.use(express.static(path.join(__dirname, '/../client/build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/../client/build', 'index.html'));
-  });
 
 server.listen(process.env.PORT || 8080, () => {
     console.log('listening...')
