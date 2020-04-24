@@ -7,7 +7,7 @@
     "dev": "nodemon backend/server.js",
     "start": "cd backend && node server",
     "install": "cd backend && npm install",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build && cp -r build/. /../backend/"
   },
   "repository": {
     "type": "git",
