@@ -7,7 +7,7 @@
     "dev": "nodemon backend/server.js",
     "start": "cd backend && node server",
     "install": "cd backend && npm install",
-    "heroku-postbuild": "cd client && npm install && npm run build && cp -r build/. /../backend/"
+    "heroku-postbuild": "cd client && npm install && npm run build && node /../ops/copyBuildFolder.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/erolcanozgen/tahminn/issues"
   },
-  "homepage": "https://github.com/erolcanozgen/tahminn#readme"
+  "homepage": "https://github.com/erolcanozgen/tahminn#readme",
+  "dependencies": {
+    "fs-extra": "^9.0.0"
+  }
 }
