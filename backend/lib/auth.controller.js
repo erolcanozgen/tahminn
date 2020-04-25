@@ -3,6 +3,7 @@ exports.google = (req, res) => {
     const user = {
         name: req.user.displayName,
     }
+    console.log(user);
     io.in(req.session.socketId).emit('google', user)
     res.end()
 }
