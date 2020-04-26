@@ -41,7 +41,7 @@ export default class OAuth extends Component {
 
     startAuth = () => {
         this.popup = this.openLoginPopup()
-        
+
     }
 
     closeCard = () => {
@@ -49,28 +49,18 @@ export default class OAuth extends Component {
     }
 
     render() {
-        if (this.state.isLoggedIn === true) {
-            return <Redirect to={{pathname:'/registration',state: { user: this.state.user }}}  />
+
+       if (this.state.isLoggedIn === true) {
+          return <Redirect to={{pathname:'/registration',state: { user: this.state.user }}}  />
         }
-        const { name, photo } = this.state.user
-        const { provider} = this.props
+        const { name } = this.state.user
+        const { provider } = this.props
+
         const atSymbol = provider.name === 'twitter' ? '@' : ''
         const className = `btn ${provider.className} btn-block text-white`
         return (
-            <div style={{marginBottom:'10px'}}>
-            {name
-                ? <div className='card'>
-                    <img style={{maxHeight:'350px'}} src={photo} alt={name} />
-                    <FontAwesomeIcon
-                        icon={faTimesCircle}
-                        className='close'
-                        onClick={this.closeCard}
-                    />
-                    <h4>{`${atSymbol}${name}`}</h4>
-                </div>               
-                : 
-                <a className={className} onClick={this.startAuth}><FontAwesomeIcon icon={provider.icon} /> Sign in with <b style={{ textTransform: 'capitalize'}}>{provider.name}</b></a>
-            }
+            <div style={{ marginBottom: '10px' }}>
+                <a className={className} onClick={this.startAuth}><FontAwesomeIcon icon={provider.icon} /> Sign in with <b style={{ textTransform: 'capitalize' }}>{provider.name}</b></a>
             </div>
         )
     }

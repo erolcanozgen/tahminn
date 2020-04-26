@@ -41,6 +41,7 @@ const io = socketio(server)
 app.set('io', io)
 
 
+app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
 app.use('/', authRouter)
 
