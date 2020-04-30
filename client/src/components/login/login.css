@@ -39,3 +39,14 @@
         border-radius: 12px;
     }
 }
+
+.selected-flag
+{
+    opacity: 1 !important;
+
+}
+
+.flag{
+    opacity: 0.3;
+    cursor: pointer;
+}

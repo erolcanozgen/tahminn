@@ -10,9 +10,27 @@ import enUsFlag from '../../assets/icons/flags/en-us.png';
 
 class Login extends Component {
   state = {
+    selectedLanguage:"tr"
   }
 
+ 
+  changeLanguage(language){
+    this.setState({ selectedLanguage:language });
+};
+
   render() {
+    let classNameTrFlag ,classNameEnUsFlag;
+    classNameTrFlag = classNameEnUsFlag =  "flag";
+    
+    if(this.state.selectedLanguage === "en-us"){
+      classNameEnUsFlag += " selected-flag";
+    }
+    else
+    {
+      classNameTrFlag += " selected-flag";
+    }
+
+    debugger;
     return (
       <div className="container loginContainer">
         <div className="center-block">
@@ -24,10 +42,10 @@ class Login extends Component {
             <div className="mlt-content">
             <div className="row float-right">
               <div className="col-4">
-                  <img src={trFlag}/>
+                  <img src={trFlag} onClick={() => {this.changeLanguage("tr")}} className={classNameTrFlag}/>
               </div>
               <div className="col-4">
-                  <img src={enUsFlag}/>   
+                  <img src={enUsFlag} onClick={() => {this.changeLanguage("en-us")}}  className={classNameEnUsFlag}/>   
               </div>        
               </div>
               <Router>
