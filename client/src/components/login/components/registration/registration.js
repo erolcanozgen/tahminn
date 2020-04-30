@@ -16,7 +16,6 @@ class Registration extends Component {
 
   render() {
     return (
-        <div className="mlt-content">
         <div className="d-flex justify-content-center align-items-center row" style={{ height: "100%" }}> 
         <form>
 	        <div className="form-group input-group">
@@ -29,9 +28,7 @@ class Registration extends Component {
               <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
            </div>
         </form>
-
         </div>
-      </div>
     )
   }
 }

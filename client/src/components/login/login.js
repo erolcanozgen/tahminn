@@ -4,6 +4,8 @@ import Logo from './components/logo/logo'
 import LoginPanel from './components/loginPanel/loginPanel'
 import Registration from './components/registration/registration'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import trFlag from '../../assets/icons/flags/tr.png';
+import enUsFlag from '../../assets/icons/flags/en-us.png';
 
 
 class Login extends Component {
@@ -19,10 +21,20 @@ class Login extends Component {
               <Logo></Logo>
             </div>
             <div className="col-8 no-padding">
-            <Router>
+            <div className="mlt-content">
+            <div className="row float-right">
+              <div className="col-4">
+                  <img src={trFlag}/>
+              </div>
+              <div className="col-4">
+                  <img src={enUsFlag}/>   
+              </div>        
+              </div>
+              <Router>
                 <Route path="/login" component={LoginPanel} />
                 <Route path="/registration" component={Registration}/>
-            </Router>        
+            </Router>    
+            </div>         
             </div>
           </div>
         </div>

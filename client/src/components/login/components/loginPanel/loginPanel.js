@@ -35,7 +35,6 @@ class LoginPanel extends Component {
       )
 
     return (
-      <div className="mlt-content">
         <div className="d-flex justify-content-center align-items-center" style={{ height: "100%" }}>
           <div className="text-center social-btn">
             { 
@@ -43,7 +42,6 @@ class LoginPanel extends Component {
             }
         </div>
         </div>
-      </div>
     )
   }
 }
