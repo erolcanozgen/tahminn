@@ -1,0 +1,25 @@
+
+.mlt-content span a {
+    text-decoration: underline
+}
+
+@media(max-width:768px) {
+    body {
+        padding-top: 15px;
+    }
+
+    .mlt-content {
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        border-radius: 12px;
+    }
+}
+
+#login-panel{
+    flex-direction: column;
+}
+
+#site-name-img{
+    margin-bottom: 5em;
+    width: 100%;
+}
