@@ -10,22 +10,29 @@ import i18next from 'i18next';
 
 
 class Login extends Component {
+  state = {
+    selectedLanguage: i18next.language
+  }
+
 
   changeLanguage(language) {
-    i18next.changeLanguage(language)
+    this.setState({ selectedLanguage: language }, () => {
+      i18next.changeLanguage(language)
+    });
   }
 
   render() {
     let classNameTrFlag, classNameEnUsFlag;
     classNameTrFlag = classNameEnUsFlag = "flag";
 
-    if (i18next.language === "en") {
+    if (this.state.selectedLanguage === "en") {
       classNameEnUsFlag += " selected-flag";
     }
     else {
       classNameTrFlag += " selected-flag";
     }
 
+    debugger;
     return (
       <div className="container loginContainer">
         <div className="center-block">
