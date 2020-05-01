@@ -26,7 +26,6 @@ class Login extends Component {
       classNameTrFlag += " selected-flag";
     }
 
-    debugger;
     return (
       <div className="container loginContainer">
         <div className="center-block">

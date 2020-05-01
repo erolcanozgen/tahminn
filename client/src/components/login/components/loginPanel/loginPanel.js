@@ -3,8 +3,9 @@ import io from 'socket.io-client'
 import OAuth from './OAuth'
 import { API_URL } from './config'
 import './loginPanel.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import siteNameImg from '../../../../assets/images/site-name.png';
+
 const socket = io(API_URL)
 const providers = [
   {
@@ -35,7 +36,10 @@ class LoginPanel extends Component {
       )
 
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "100%" }}>
+      <div id="login-panel" className="d-flex justify-content-center align-items-center" style={{ height: "100%" }}>
+        <div className="text-center site-name w-50">
+          <img id="site-name-img" className="img-responsive" src={siteNameImg} alt="site-name-image" />
+        </div>
         <div className="text-center social-btn">
           {
             buttons(providers, socket)

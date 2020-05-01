@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './logo.css'
-import step1 from '../../../../assets/images/step1.png';
+import loginLogo from '../../../../assets/images/login_logo.png';
 
 class Logo extends Component {
   state = {
@@ -10,7 +10,7 @@ class Logo extends Component {
     return (
       <div className="mlt-carousel">
             <div className="item">
-                <img className="img-responsive center-block" src={step1} alt="step1"/>
+                <img id="login-logo" className="img-responsive center-block" src={loginLogo} alt="loginLogo"/>
                 <div className="item-content">
                       <h3>Lorem ipsum dolor sit amet</h3>
                       <p>Consectetur adipiscing elit</p>
