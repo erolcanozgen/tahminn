@@ -5,15 +5,16 @@ import Login from './components/login/login'
 import registerServiceWorker from './registerServiceWorker'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import $ from 'jquery';
-import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import "./i18n/index"
 
 ReactDOM.render((
-    <Router>
-        <Route path="/" component={Login} />
-    </Router>
+  <Router>
+    <Redirect from="/" to="login" />
+    <Route path="/login" component={Login}>
+    </Route>
+  </Router>
 ), document.getElementById('root'))
+
 registerServiceWorker()
