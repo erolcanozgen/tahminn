@@ -30,3 +30,12 @@
         border-radius: 12px;
     }
 }
+
+#login-panel{
+    flex-direction: column;
+}
+
+#site-name-img{
+    margin-bottom: 5em;
+    width: 100%;
+}
