@@ -6,27 +6,23 @@ import Registration from './components/registration/registration'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import trFlag from '../../assets/icons/flags/tr.png';
 import enUsFlag from '../../assets/icons/flags/en-us.png';
+import i18next from 'i18next';
 
 
 class Login extends Component {
-  state = {
-    selectedLanguage:"tr"
+
+  changeLanguage(language) {
+    i18next.changeLanguage(language)
   }
 
- 
-  changeLanguage(language){
-    this.setState({ selectedLanguage:language });
-};
-
   render() {
-    let classNameTrFlag ,classNameEnUsFlag;
-    classNameTrFlag = classNameEnUsFlag =  "flag";
-    
-    if(this.state.selectedLanguage === "en-us"){
+    let classNameTrFlag, classNameEnUsFlag;
+    classNameTrFlag = classNameEnUsFlag = "flag";
+
+    if (i18next.language === "en") {
       classNameEnUsFlag += " selected-flag";
     }
-    else
-    {
+    else {
       classNameTrFlag += " selected-flag";
     }
 
@@ -34,25 +30,25 @@ class Login extends Component {
     return (
       <div className="container loginContainer">
         <div className="center-block">
-        <div className="row">
-            <div className="col-4 no-padding" style={{zIndex: 1}}>
+          <div className="row">
+            <div className="col-4 no-padding" style={{ zIndex: 1 }}>
               <Logo></Logo>
             </div>
             <div className="col-8 no-padding">
-            <div className="mlt-content">
-            <div className="row float-right">
-              <div className="col-4">
-                  <img src={trFlag} onClick={() => {this.changeLanguage("tr")}} className={classNameTrFlag}/>
+              <div className="mlt-content">
+                <div className="row float-right">
+                  <div className="col-4">
+                    <img src={trFlag} onClick={() => { this.changeLanguage("tr") }} className={classNameTrFlag} />
+                  </div>
+                  <div className="col-4">
+                    <img src={enUsFlag} onClick={() => { this.changeLanguage("en") }} className={classNameEnUsFlag} />
+                  </div>
+                </div>
+                <Router>
+                  <Route path="/login" component={LoginPanel} />
+                  <Route path="/registration" component={Registration} />
+                </Router>
               </div>
-              <div className="col-4">
-                  <img src={enUsFlag} onClick={() => {this.changeLanguage("en-us")}}  className={classNameEnUsFlag}/>   
-              </div>        
-              </div>
-              <Router>
-                <Route path="/login" component={LoginPanel} />
-                <Route path="/registration" component={Registration}/>
-            </Router>    
-            </div>         
             </div>
           </div>
         </div>

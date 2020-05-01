@@ -4,14 +4,14 @@ import { API_URL } from './config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from "react-router-dom";
+import { withTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
-
-
-export default class OAuth extends Component {
+class OAuth extends Component {
 
     state = {
         user: {},
-        isLoggedIn:false
+        isLoggedIn: false
     }
 
 
@@ -21,7 +21,7 @@ export default class OAuth extends Component {
         socket.on(provider.name, user => {
             this.popup.close();
             this.setState({ user });
-            this.setState({ isLoggedIn:true });
+            this.setState({ isLoggedIn: true });
         })
     }
 
@@ -49,9 +49,9 @@ export default class OAuth extends Component {
     }
 
     render() {
-
-       if (this.state.isLoggedIn === true) {
-          return <Redirect to={{pathname:'/registration',state: { user: this.state.user }}}  />
+        const { t } = this.props;
+        if (this.state.isLoggedIn === true) {
+            return <Redirect to={{ pathname: '/registration', state: { user: this.state.user } }} />
         }
         const { name } = this.state.user
         const { provider } = this.props
@@ -60,7 +60,8 @@ export default class OAuth extends Component {
         const className = `btn ${provider.className} btn-block text-white`
         return (
             <div style={{ marginBottom: '10px' }}>
-                <a className={className} onClick={this.startAuth}><FontAwesomeIcon icon={provider.icon} /> Sign in with <b style={{ textTransform: 'capitalize' }}>{provider.name}</b></a>
+                <a className={className} onClick={this.startAuth}><FontAwesomeIcon icon={provider.icon} /> {t('OAuth.signin',
+                    { providerName: `${provider.name.charAt(0).toUpperCase() + provider.name.substring(1)}` })}</a>
             </div>
         )
     }
@@ -70,3 +71,7 @@ OAuth.propTypes = {
     provider: PropTypes.object.isRequired,
     socket: PropTypes.object.isRequired
 }
+
+const OAuthComponent = withTranslation()(OAuth)
+
+export default OAuthComponent;
