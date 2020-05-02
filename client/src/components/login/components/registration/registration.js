@@ -11,6 +11,14 @@ class Registration extends Component {
     providerName: ''
   }
 
+  handleChange = (e) => {
+
+    if (e.target) {
+      let user = Object.assign({}, this.state.user);
+      user.name = e.target.value;
+      this.setState({ user: user });
+    }
+  }
 
   componentDidMount() {
     const { location } = this.props
@@ -43,10 +51,10 @@ class Registration extends Component {
             <div className="input-group-prepend">
               <span className="input-group-text"> <FontAwesomeIcon icon={faUser} /></span>
             </div>
-            <input className="form-control" placeholder="Full name" type="text" value={this.state.user.name} />
+            <input className="form-control" placeholder="Full name" type="text" value={this.state.user.name} onChange={(e) => { this.handleChange(e) }} />
           </div>
           <div className="form-group">
-            <button type="submit" onClick={this.addUser()} className="btn btn-primary btn-block"> Create Account  </button>
+            <button type="submit" onClick={() => { this.addUser() }} className="btn btn-primary btn-block"> Create Account  </button>
           </div>
         </form>
       </div>
