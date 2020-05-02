@@ -20,8 +20,13 @@ class OAuth extends Component {
 
         socket.on(provider.name, user => {
             this.popup.close();
-            this.setState({ user });
-            this.setState({ isLoggedIn: true });
+            this.setState({
+                user: user,
+                isLoggedIn: true
+            });
+
+
+
         })
     }
 
