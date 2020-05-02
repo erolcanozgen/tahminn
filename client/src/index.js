@@ -8,13 +8,8 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import "./i18n/index"
+import App from "./App";
 
-ReactDOM.render((
-  <Router>
-    <Redirect from="/" to="login" />
-    <Route path="/login" component={Login}>
-    </Route>
-  </Router>
-), document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById("root"));
 
 registerServiceWorker()
