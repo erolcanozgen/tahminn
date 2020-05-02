@@ -46,12 +46,12 @@ app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
 app.use('/', authRouter)
 
-// app.use('/login', routers.loginRouter)
 
-db.connection
-    .sync({
-        force: false
-    })
+//use this comment if any synchronization needed
+// if new table(s) will be added use db.connection.sync({force: false})
+// if there are changes on already exsisting table such as column changes, db.connection.sync({force: true})
+// Be careful !! while using db.connection.sync({force: true}) because it will remove all contents from the all tables
+db.connection.sync({force: true})
 
 
 server.listen(process.env.PORT || 8080, () => {
