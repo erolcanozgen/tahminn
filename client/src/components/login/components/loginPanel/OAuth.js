@@ -34,7 +34,7 @@ class OAuth extends Component {
                         })
                     }
                     else {
-                        alert("Welcome to party!!");
+                        alert(`Welcome to party ${res.data.user.username}!!`);
                     }
                 });
 
