@@ -50,10 +50,11 @@ class Login extends Component {
                     <img src={enUsFlag} onClick={() => { this.changeLanguage("en") }} className={classNameEnUsFlag} />
                   </div>
                 </div>
-                <Router>
+                <Switch>
                   <Route path="/login" component={LoginPanel} />
                   <Route path="/registration" component={Registration} />
-                </Router>
+                  <Route component={LoginPanel} />
+                </Switch>
               </div>
             </div>
           </div>
