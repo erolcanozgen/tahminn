@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { API_URL } from './config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Redirect } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
 import axios from 'axios';
 import history from '../../../../services/history'
@@ -11,8 +10,6 @@ class OAuth extends Component {
 
     state = {
         user: null,
-        isLoggedIn: false,
-        isFirtsLogin: false,
         providerName: ''
     }
 
@@ -24,7 +21,6 @@ class OAuth extends Component {
             this.popup.close();
             this.setState({
                 user: user,
-                isLoggedIn: true,
                 providerName: provider.name
             });
 
@@ -38,7 +34,7 @@ class OAuth extends Component {
                         })
                     }
                     else {
-                        this.setState({ isLoggedIn: true });
+                        alert("Welcome to party!!");
                     }
                 });
 
@@ -70,10 +66,6 @@ class OAuth extends Component {
 
     render() {
         const { t } = this.props;
-
-        if (this.state.isLoggedIn === true) {
-            alert("Welcome to party!!");
-        }
 
         const { provider } = this.props
 
