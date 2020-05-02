@@ -1,8 +1,16 @@
 module.exports = app => {
     const controllers = require("../controllers");    
-    var router = require("express").Router();
 
-    router.post("/google", controllers.loginController.loginWithGoogle);
+    var loginRouter = require("express").Router();
+    loginRouter.post("/google", controllers.loginController.loginWithGoogle);
+    loginRouter.post("/twitter", controllers.loginController.loginWithTwitter);
 
-    app.use('/api/login', router);
+
+    var registrationRouter = require("express").Router();
+    registrationRouter.post("/google", controllers.loginController.addGoogleAccount);
+    registrationRouter.post("/twitter", controllers.loginController.addTwitterAccount);
+
+
+    app.use('/api/login', loginRouter);
+    app.use('/api/registration', registrationRouter);
   };

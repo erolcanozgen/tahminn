@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { API_URL } from './config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
-import i18next from 'i18next';
+import axios from 'axios';
+import history from '../../../../services/history'
 
 class OAuth extends Component {
 
     state = {
-        user: {},
-        isLoggedIn: false
+        user: null,
+        isLoggedIn: false,
+        isFirtsLogin: false,
+        providerName: ''
     }
 
 
@@ -22,9 +24,23 @@ class OAuth extends Component {
             this.popup.close();
             this.setState({
                 user: user,
-                isLoggedIn: true
+                isLoggedIn: true,
+                providerName: provider.name
             });
 
+            axios.post(`${API_URL}/api/login/${provider.name}`, {
+                id: user.id,
+            })
+                .then(res => {
+                    if (!res.data) {
+                        history.push('/registration', {
+                            user: this.state.user, providerName: this.state.providerName
+                        })
+                    }
+                    else {
+                        this.setState({ isLoggedIn: true });
+                    }
+                });
 
 
         })
@@ -46,7 +62,6 @@ class OAuth extends Component {
 
     startAuth = () => {
         this.popup = this.openLoginPopup()
-
     }
 
     closeCard = () => {
@@ -55,10 +70,11 @@ class OAuth extends Component {
 
     render() {
         const { t } = this.props;
+
         if (this.state.isLoggedIn === true) {
-            return <Redirect to={{ pathname: '/registration', state: { user: this.state.user } }} />
+            alert("Welcome to party!!");
         }
-        const { name } = this.state.user
+
         const { provider } = this.props
 
         const atSymbol = provider.name === 'twitter' ? '@' : ''
