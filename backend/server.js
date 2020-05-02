@@ -11,6 +11,7 @@ const socketio = require('socket.io')
 const authRouter = require('./lib/auth.router')
 const passportInit = require('./lib/passport.init')
 const { SESSION_SECRET, CLIENT_ORIGIN } = require('./config')
+const db = require('./Models')
 const app = express()
 let server
 
@@ -44,6 +45,14 @@ app.set('io', io)
 app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
 app.use('/', authRouter)
+
+
+//use this comment if any synchronization needed
+// if new table(s) will be added use db.connection.sync({force: false})
+// if there are changes on already exsisting table such as column changes, db.connection.sync({force: true})
+// Be careful !! while using db.connection.sync({force: true}) because it will remove all contents from the all tables
+db.connection.sync({force: false})
+
 
 server.listen(process.env.PORT || 8080, () => {
     console.log('listening...')
