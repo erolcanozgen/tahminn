@@ -9,6 +9,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
     "bootstrap": "^4.4.1",
+    "history": "^4.10.1",
     "i18next": "^19.4.4",
     "i18next-browser-languagedetector": "^4.1.1",
     "jquery": "^3.5.0",
