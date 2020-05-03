@@ -1,6 +1,5 @@
 exports.google = (req, res) => {
     const io = req.app.get('io')
-    console.log(req.user)
     const user = {
         name: req.user.displayName,
         id: req.user.id

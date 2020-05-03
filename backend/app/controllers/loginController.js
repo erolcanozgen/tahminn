@@ -26,20 +26,17 @@ exports.loginWithGoogle = (req, res) => {
 
 exports.addGoogleAccount = (req, res) => {
     const googleAccount = req.body.user;
-    db.user.create({
-        username: googleAccount.name
-    }).then((user) => {
-        db.google_account.create({
-            google_id: googleAccount.id,
-            userId: user.id
-        }).then(() => {
-            res.send(true)
-        }).catch((err) => {
-            res.status(500).send({
-                message:
-                    err.message || "error occurred while creating the google account."
-            });
-        });
+    db.google_account.create({
+        google_id: googleAccount.id,
+        user: {
+            username: googleAccount.name
+        }
+    }, {
+        include: [{
+            association: db.userGoogleAccounts,
+        }]
+    }).then(() => {
+        res.send(true)
     }).catch((err) => {
         res.status(500).send({
             message:
@@ -67,27 +64,24 @@ exports.loginWithTwitter = (req, res) => {
     }).catch((err) => {
         res.status(500).send({
             message:
-                err.message || "error occurred while getting the google account."
+                err.message || "error occurred while getting the twitter account."
         });
     });
 };
 
 exports.addTwitterAccount = (req, res) => {
     const twitterAccount = req.body.user;
-    db.user.create({
-        username: twitterAccount.name
-    }).then((user) => {
-        db.twitter_account.create({
-            twitter_id: twitterAccount.id,
-            userId: user.id
-        }).then(() => {
-            res.send(true)
-        }).catch((err) => {
-            res.status(500).send({
-                message:
-                    err.message || "error occurred while creating the google account."
-            });
-        });
+    db.twitter_account.create({
+        twitter_id: twitterAccount.id,
+        user: {
+            username: twitterAccount.name
+        }
+    }, {
+        include: [{
+            association: db.userTwitterAccounts,
+        }]
+    }).then(() => {
+        res.send(true)
     }).catch((err) => {
         res.status(500).send({
             message:

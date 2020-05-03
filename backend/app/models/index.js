@@ -8,10 +8,10 @@ db.connection = connection;
 db.user = require("./user")(connection, Sequelize)
 
 db.google_account = require("./google_account")(connection, Sequelize)
-db.google_account.belongsTo(db.user) // puts freignKey UserID in google_accounts table.
+db.userGoogleAccounts = db.google_account.belongsTo(db.user) // puts freignKey UserID in google_accounts table.
 
 db.twitter_account = require("./twitter_account")(connection, Sequelize)
-db.twitter_account.belongsTo(db.user) // puts freignKey UserID in google_accounts table.
+db.userTwitterAccounts = db.twitter_account.belongsTo(db.user) // puts freignKey UserID in google_accounts table.
 
 db.interest = require("./interest")(connection, Sequelize)
 //#region UserInterest Association

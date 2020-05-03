@@ -28,7 +28,7 @@ class OAuth extends Component {
                 id: user.id,
             })
                 .then(res => {
-                    if (!res.data) {
+                    if (!res.data.user) {
                         history.push('/registration', {
                             user: this.state.user, providerName: this.state.providerName
                         })
@@ -66,10 +66,7 @@ class OAuth extends Component {
 
     render() {
         const { t } = this.props;
-
         const { provider } = this.props
-
-        const atSymbol = provider.name === 'twitter' ? '@' : ''
         const className = `btn ${provider.className} btn-block text-white`
         return (
             <div style={{ marginBottom: '10px' }}>

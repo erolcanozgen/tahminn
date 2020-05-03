@@ -34,12 +34,9 @@ class Registration extends Component {
       user: this.state.user
     })
       .then(res => {
-        if (res.data) {
-          alert('Welcome to Party !!!')
-        }
-        else {
-          alert('Error occured.')
-        }
+        alert('Welcome to Party !!!')
+      }).catch(err => {
+        alert(`Error occured. ${err}`);
       });
   }
 
