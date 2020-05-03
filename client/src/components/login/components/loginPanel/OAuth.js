@@ -73,7 +73,7 @@ class OAuth extends Component {
         const className = `btn ${provider.className} btn-block text-white`
         return (
             <div style={{ marginBottom: '10px' }}>
-                <a className={className} onClick={this.startAuth}><FontAwesomeIcon icon={provider.icon} /> {t('OAuth.signin',
+                <a className={className} onClick={this.startAuth}><FontAwesomeIcon icon={provider.icon} /> {t('Login.signin',
                     { providerName: `${provider.name.charAt(0).toUpperCase() + provider.name.substring(1)}` })}</a>
             </div>
         )
@@ -85,6 +85,6 @@ OAuth.propTypes = {
     socket: PropTypes.object.isRequired
 }
 
-const OAuthComponent = withTranslation()(OAuth)
+const TranslatedOAuth = withTranslation()(OAuth)
 
-export default OAuthComponent;
+export default TranslatedOAuth;

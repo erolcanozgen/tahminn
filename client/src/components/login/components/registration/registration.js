@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_URL } from '../loginPanel/config'
+import { withTranslation } from 'react-i18next';
 
 class Registration extends Component {
   state = {
@@ -43,7 +44,7 @@ class Registration extends Component {
   }
 
   render() {
-    debugger;
+    const { t } = this.props;
     return (
       <div className="d-flex justify-content-center align-items-center row" style={{ height: "100%" }}>
         <form>
@@ -54,7 +55,7 @@ class Registration extends Component {
             <input className="form-control" placeholder="Full name" type="text" value={this.state.user.name} onChange={(e) => { this.handleChange(e) }} />
           </div>
           <div className="form-group">
-            <button type="submit" onClick={() => { this.addUser() }} className="btn btn-primary btn-block"> Create Account  </button>
+            <button type="submit" onClick={() => { this.addUser() }} className="btn btn-primary btn-block"> {t('Login.registration')}  </button>
           </div>
         </form>
       </div>
@@ -62,4 +63,6 @@ class Registration extends Component {
   }
 }
 
-export default Registration
+const TranslatedRegistration = withTranslation()(Registration)
+
+export default TranslatedRegistration

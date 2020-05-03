@@ -1,0 +1,6 @@
+{
+    "en": {
+        "signin": "Sign in With {{-providerName}}",
+        "registration": "Create Account"
+    }
+}
