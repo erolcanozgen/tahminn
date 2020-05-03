@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { API_URL } from './config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { Redirect } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
-import i18next from 'i18next';
+import axios from 'axios';
+import history from '../../../../services/history'
 
 class OAuth extends Component {
 
     state = {
-        user: {},
-        isLoggedIn: false
+        user: null,
+        providerName: ''
     }
 
 
@@ -20,8 +19,26 @@ class OAuth extends Component {
 
         socket.on(provider.name, user => {
             this.popup.close();
-            this.setState({ user });
-            this.setState({ isLoggedIn: true });
+            this.setState({
+                user: user,
+                providerName: provider.name
+            });
+
+            axios.post(`${API_URL}/api/login/${provider.name}`, {
+                id: user.id,
+            })
+                .then(res => {
+                    if (!res.data.user) {
+                        history.push('/registration', {
+                            user: this.state.user, providerName: this.state.providerName
+                        })
+                    }
+                    else {
+                        alert(`Welcome to party ${res.data.user.username}!!`);
+                    }
+                });
+
+
         })
     }
 
@@ -41,7 +58,6 @@ class OAuth extends Component {
 
     startAuth = () => {
         this.popup = this.openLoginPopup()
-
     }
 
     closeCard = () => {
@@ -50,17 +66,11 @@ class OAuth extends Component {
 
     render() {
         const { t } = this.props;
-        if (this.state.isLoggedIn === true) {
-            return <Redirect to={{ pathname: '/registration', state: { user: this.state.user } }} />
-        }
-        const { name } = this.state.user
         const { provider } = this.props
-
-        const atSymbol = provider.name === 'twitter' ? '@' : ''
         const className = `btn ${provider.className} btn-block text-white`
         return (
             <div style={{ marginBottom: '10px' }}>
-                <a className={className} onClick={this.startAuth}><FontAwesomeIcon icon={provider.icon} /> {t('OAuth.signin',
+                <a className={className} onClick={this.startAuth}><FontAwesomeIcon icon={provider.icon} /> {t('Login.signin',
                     { providerName: `${provider.name.charAt(0).toUpperCase() + provider.name.substring(1)}` })}</a>
             </div>
         )
@@ -72,6 +82,6 @@ OAuth.propTypes = {
     socket: PropTypes.object.isRequired
 }
 
-const OAuthComponent = withTranslation()(OAuth)
+const TranslatedOAuth = withTranslation()(OAuth)
 
-export default OAuthComponent;
+export default TranslatedOAuth;

@@ -11,7 +11,8 @@ const socketio = require('socket.io')
 const authRouter = require('./lib/auth.router')
 const passportInit = require('./lib/passport.init')
 const { SESSION_SECRET, CLIENT_ORIGIN } = require('./config')
-const db = require('./Models')
+const db = require('./app/models')
+const routes = require('./app/routes')
 const app = express()
 let server
 
@@ -42,9 +43,12 @@ const io = socketio(server)
 app.set('io', io)
 
 
+
 app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
-app.use('/', authRouter)
+app.use('/', authRouter);
+
+routes.loginRoutes(app);
 
 
 //use this comment if any synchronization needed
