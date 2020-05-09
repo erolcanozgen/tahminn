@@ -19,8 +19,10 @@
 /* Create three equal columns that floats next to each other */
 .column {
     float: left;
-    width: 33.33%;
+    width: 18%;
     display: block;
+    margin: 1%;
+    background-color: #eeeeee;
 }
 
 /* Clear floats after rows */
@@ -30,10 +32,20 @@
     clear: both;
 }
 
-/* Content */
-.content {
-    background-color: white;
-    padding: 10px;
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column {
+      flex: 31%;
+      max-width: 31%;
+    }
+  }
+  
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 48%;
+    max-width: 48%;
+  }
 }
 
 /* The "show" class is added to the filtered elements */
