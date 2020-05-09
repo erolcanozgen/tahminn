@@ -5,6 +5,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_URL } from '../loginPanel/config'
 import { withTranslation } from 'react-i18next';
+import history from '../../../../services/history'
 
 class Registration extends Component {
   state = {
@@ -34,7 +35,9 @@ class Registration extends Component {
       user: this.state.user
     })
       .then(res => {
-        alert('Welcome to Party !!!')
+        history.push('/interest', {
+          user: this.state.user
+        })
       }).catch(err => {
         alert(`Error occured. ${err}`);
       });
