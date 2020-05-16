@@ -9,7 +9,7 @@ const callbacks = providers.map(provider => {
 const [googleURL, twitterURL] = callbacks
 
 exports.CLIENT_ORIGIN = process.env.NODE_ENV === 'production'
-    ? 'http://tahminn.herokuapp.com'
+    ? ['http://tahminn.herokuapp.com','http://www.tahminn.com']
     : ['http://127.0.0.1:3000', 'http://localhost:3000']
 
 exports.GOOGLE_CONFIG = {
