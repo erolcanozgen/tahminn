@@ -2,8 +2,8 @@ const providers = ['google', 'twitter']
 
 const callbacks = providers.map(provider => {
     return process.env.NODE_ENV === 'production'
-        ? `http://tahminn.herokuapp.com/${provider}/callback`
-        : `http://localhost:8080/${provider}/callback`
+        ? `http://tahminn.herokuapp.com/api/login/oauth/${provider}/callback`
+        : `http://localhost:8080/api/login/oauth/${provider}/callback`
 })
 
 const [googleURL, twitterURL] = callbacks

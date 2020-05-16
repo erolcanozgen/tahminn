@@ -8,7 +8,6 @@ const passport = require('passport')
 const session = require('express-session')
 const cors = require('cors')
 const socketio = require('socket.io')
-const authRouter = require('./lib/auth.router')
 const passportInit = require('./lib/passport.init')
 const { SESSION_SECRET, CLIENT_ORIGIN } = require('./config')
 const db = require('./app/models')
@@ -46,7 +45,6 @@ app.set('io', io)
 
 app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
-app.use('/', authRouter);
 
 routes.loginRoutes(app);
 
