@@ -33,7 +33,8 @@ app.use(cors({
 app.use(session({
     secret: process.env.SESSION_SECRET || 'default_session_secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { httpOnly: false }
 }))
 
 // Connecting sockets to the server and adding them to the request 

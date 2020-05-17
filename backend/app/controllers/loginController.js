@@ -109,3 +109,9 @@ exports.oauthCallbackForTwitter = (req, res) => {
     io.in(req.session.socketId).emit('twitter', user)
     res.end()
 }
+
+
+exports.logout = (req, res) => {
+    req.session.destroy();
+    res.end()
+}

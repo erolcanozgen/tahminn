@@ -8,6 +8,7 @@ import history from '../../../../services/history'
 
 class OAuth extends Component {
 
+
     state = {
         user: null,
         providerName: ''
@@ -18,7 +19,9 @@ class OAuth extends Component {
         const { socket, provider } = this.props
 
         socket.on(provider.name, user => {
-            this.popup.close();
+            if (this.popup) {
+                this.popup.close();
+            }
             this.setState({
                 user: user,
                 providerName: provider.name
@@ -34,7 +37,7 @@ class OAuth extends Component {
                         })
                     }
                     else {
-                        alert(`Welcome to party ${res.data.user.username}!!`);
+                        history.push('/dashboard')
                     }
                 });
 
