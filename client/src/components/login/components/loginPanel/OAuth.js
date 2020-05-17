@@ -8,13 +8,6 @@ import history from '../../../../services/history'
 
 class OAuth extends Component {
 
-
-    state = {
-        user: null,
-        providerName: ''
-    }
-
-
     componentDidMount() {
         const { socket, provider } = this.props
 
@@ -22,26 +15,16 @@ class OAuth extends Component {
             if (this.popup) {
                 this.popup.close();
             }
-            this.setState({
-                user: user,
-                providerName: provider.name
-            });
 
-            axios.post(`${API_URL}/api/login/${provider.name}`, {
-                id: user.id,
-            })
-                .then(res => {
-                    if (!res.data.user) {
-                        history.push('/registration', {
-                            user: this.state.user, providerName: this.state.providerName
-                        })
-                    }
-                    else {
-                        history.push('/dashboard')
-                    }
-                });
+            if (user.IsFirstLogin) {
+                history.push('/registration', {
+                    user: user, providerName: provider.name
+                })
+            }
+            else {
+                history.push('/dashboard')
 
-
+            }
         })
     }
 
@@ -63,9 +46,6 @@ class OAuth extends Component {
         this.popup = this.openLoginPopup()
     }
 
-    closeCard = () => {
-        this.setState({ user: {} })
-    }
 
     render() {
         const { t } = this.props;

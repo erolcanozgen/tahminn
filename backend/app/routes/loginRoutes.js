@@ -19,9 +19,6 @@ module.exports = app => {
     next();
   })
 
-  loginRouter.post("/google", controllers.loginController.loginWithGoogle);
-  loginRouter.post("/twitter", controllers.loginController.loginWithTwitter);
-
   loginRouter.get("/oauth/google", googleAuth);
   loginRouter.get("/oauth/twitter", twitterAuth);
 

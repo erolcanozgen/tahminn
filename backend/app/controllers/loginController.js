@@ -1,29 +1,5 @@
 const db = require("../models");
 
-exports.loginWithGoogle = (req, res) => {
-    // Validate request
-    if (!req.body.id) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-    db.google_account.findByPk(req.body.id, {
-        include: [
-            {
-                model: db.user,
-            }
-        ],
-    }).then((account) => {
-        res.send(account)
-    }).catch((err) => {
-        res.status(500).send({
-            message:
-                err.message || "error occurred while getting the google account."
-        });
-    });
-};
-
 exports.addGoogleAccount = (req, res) => {
     const googleAccount = req.body.user;
     db.google_account.create({
@@ -44,30 +20,6 @@ exports.addGoogleAccount = (req, res) => {
         });
     });
 }
-
-exports.loginWithTwitter = (req, res) => {
-    // Validate request
-    if (!req.body.id) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-    db.twitter_account.findByPk(req.body.id, {
-        include: [
-            {
-                model: db.user,
-            }
-        ],
-    }).then((account) => {
-        res.send(account)
-    }).catch((err) => {
-        res.status(500).send({
-            message:
-                err.message || "error occurred while getting the twitter account."
-        });
-    });
-};
 
 exports.addTwitterAccount = (req, res) => {
     const twitterAccount = req.body.user;
@@ -92,22 +44,51 @@ exports.addTwitterAccount = (req, res) => {
 
 exports.oauthCallbackForGoogle = (req, res) => {
     const io = req.app.get('io')
-    const user = {
-        name: req.user.displayName,
-        id: req.user.id
-    }
-    io.in(req.session.socketId).emit('google', user)
-    res.end()
+
+    db.google_account.findByPk(req.user.id, {
+        include: [
+            {
+                model: db.user,
+            }
+        ],
+    }).then((account) => {
+        if (account) {
+            io.in(req.session.socketId).emit('google', account)
+        }
+        else {
+            io.in(req.session.socketId).emit('google', { IsFirstLogin: true, name: req.user.displayName, id:req.user.id })
+        }
+        res.end()
+    }).catch((err) => {
+        res.status(500).send({
+            message:
+                err.message || "error occurred while getting the google account."
+        });
+    });
 }
 
 exports.oauthCallbackForTwitter = (req, res) => {
     const io = req.app.get('io')
-    const user = {
-        name: req.user.username,
-        id: req.user.id
-    }
-    io.in(req.session.socketId).emit('twitter', user)
-    res.end()
+    db.twitter_account.findByPk(req.user.id, {
+        include: [
+            {
+                model: db.user,
+            }
+        ],
+    }).then((account) => {
+        if (account) {
+            io.in(req.session.socketId).emit('twitter', account)
+        }
+        else {
+            io.in(req.session.socketId).emit('twitter', { IsFirstLogin: true, name: req.user.username,id:req.user.id })
+        }
+        res.end();
+    }).catch((err) => {
+        res.status(500).send({
+            message:
+                err.message || "error occurred while getting the twitter account."
+        });
+    });
 }
 
 
