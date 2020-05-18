@@ -8,7 +8,7 @@ const {
 module.exports = () => {
 
     // Allowing passport to serialize and deserialize users into sessions
-    passport.serializeUser((user, cb) => cb(null, user))
+    passport.serializeUser((user, cb) => { cb(null, user.id) })
     passport.deserializeUser((obj, cb) => cb(null, obj))
 
     // The callback that is invoked when an OAuth provider sends back user 

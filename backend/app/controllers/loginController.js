@@ -56,7 +56,7 @@ exports.oauthCallbackForGoogle = (req, res) => {
             io.in(req.session.socketId).emit('google', account)
         }
         else {
-            io.in(req.session.socketId).emit('google', { IsFirstLogin: true, name: req.user.displayName, id:req.user.id })
+            io.in(req.session.socketId).emit('google', { IsFirstLogin: true, name: req.user.displayName, id: req.user.id })
         }
         res.end()
     }).catch((err) => {
@@ -80,7 +80,7 @@ exports.oauthCallbackForTwitter = (req, res) => {
             io.in(req.session.socketId).emit('twitter', account)
         }
         else {
-            io.in(req.session.socketId).emit('twitter', { IsFirstLogin: true, name: req.user.username,id:req.user.id })
+            io.in(req.session.socketId).emit('twitter', { IsFirstLogin: true, name: req.user.username, id: req.user.id })
         }
         res.end();
     }).catch((err) => {
@@ -95,4 +95,11 @@ exports.oauthCallbackForTwitter = (req, res) => {
 exports.logout = (req, res) => {
     req.session.destroy();
     res.end()
+}
+
+exports.checkSession = (req, res) => {
+    if (req.session.passport && req.session.passport.user)
+        res.send({ IsAuthenticated: true })
+    else
+        res.send({ IsAuthenticated: false })
 }

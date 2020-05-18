@@ -25,7 +25,8 @@ passportInit()
 
 // Accept requests from our client
 app.use(cors({
-    origin: CLIENT_ORIGIN
+    origin: CLIENT_ORIGIN,
+    credentials: true
 }))
 
 // saveUninitialized: true allows us to attach the socket id to the session
@@ -33,8 +34,7 @@ app.use(cors({
 app.use(session({
     secret: process.env.SESSION_SECRET || 'default_session_secret',
     resave: true,
-    saveUninitialized: true,
-    cookie: { httpOnly: false }
+    saveUninitialized: true
 }))
 
 // Connecting sockets to the server and adding them to the request 
@@ -54,7 +54,7 @@ routes.loginRoutes(app);
 // if new table(s) will be added use db.connection.sync({force: false})
 // if there are changes on already exsisting table such as column changes, db.connection.sync({force: true})
 // Be careful !! while using db.connection.sync({force: true}) because it will remove all contents from the all tables
-db.connection.sync({force: false})
+db.connection.sync({ force: false })
 
 
 server.listen(process.env.PORT || 8080, () => {

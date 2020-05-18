@@ -27,8 +27,8 @@ module.exports = app => {
   loginRouter.get('/oauth/google/callback', googleAuth, controllers.loginController.oauthCallbackForGoogle)
   loginRouter.get('/oauth/twitter/callback', twitterAuth, controllers.loginController.oauthCallbackForTwitter)
 
+  loginRouter.get("/checkSession", controllers.loginController.checkSession);
 
-  
   var registrationRouter = require("express").Router();
   registrationRouter.post("/google", controllers.loginController.addGoogleAccount);
   registrationRouter.post("/twitter", controllers.loginController.addTwitterAccount);
@@ -37,5 +37,5 @@ module.exports = app => {
   app.use('/api/login', loginRouter);
   app.use('/api/registration', registrationRouter);
 
-  app.get('/api/logout',controllers.loginController.logout)
+  app.get('/api/logout', controllers.loginController.logout)
 };
