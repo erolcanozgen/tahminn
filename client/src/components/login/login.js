@@ -42,7 +42,7 @@ class Login extends Component {
             </div>
             <div className="col-12 col-sm-8 no-padding">
               <div className="mlt-content col-12">
-                <div className="row float-right">
+                <div className="row float-right justify-content-center">
                   <div className="col-4">
                     <img src={trFlag} onClick={() => { this.changeLanguage("tr") }} className={classNameTrFlag} />
                   </div>
