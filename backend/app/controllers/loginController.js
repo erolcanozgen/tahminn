@@ -12,8 +12,8 @@ exports.addGoogleAccount = (req, res) => {
             association: db.userGoogleAccounts,
         }]
     }).then(() => {
-            req.session.passport.user.isFirstLogin = false;
-            res.send(true)
+        req.session.passport.user.isFirstLogin = false;
+        res.send(true)
     }).catch((err) => {
         res.status(500).send({
             message:
@@ -34,8 +34,8 @@ exports.addTwitterAccount = (req, res) => {
             association: db.userTwitterAccounts,
         }]
     }).then(() => {
-            req.session.passport.user.isFirstLogin = false;
-            res.send(true)
+        req.session.passport.user.isFirstLogin = false;
+        res.send(true)
     }).catch((err) => {
         res.status(500).send({
             message:
@@ -53,13 +53,8 @@ exports.oauthCallbackForGoogle = (req, res) => {
                 model: db.user,
             }
         ],
-    }).then((account) => {
-        if (account) {
-            io.in(req.session.socketId).emit('google', account)
-        }
-        else {
-            io.in(req.session.socketId).emit('google', { IsFirstLogin: true, name: req.user.displayName, id: req.user.id })
-        }
+    }).then(() => {
+        io.in(req.session.socketId).emit('google')
         res.end()
     }).catch((err) => {
         res.status(500).send({
@@ -77,13 +72,8 @@ exports.oauthCallbackForTwitter = (req, res) => {
                 model: db.user,
             }
         ],
-    }).then((account) => {
-        if (account) {
-            io.in(req.session.socketId).emit('twitter', account)
-        }
-        else {
-            io.in(req.session.socketId).emit('twitter', { IsFirstLogin: true, name: req.user.username, id: req.user.id })
-        }
+    }).then(() => {
+        io.in(req.session.socketId).emit('twitter')
         res.end();
     }).catch((err) => {
         res.status(500).send({
