@@ -12,7 +12,8 @@ exports.addGoogleAccount = (req, res) => {
             association: db.userGoogleAccounts,
         }]
     }).then(() => {
-        res.send(true)
+            req.session.passport.user.isFirstLogin = false;
+            res.send(true)
     }).catch((err) => {
         res.status(500).send({
             message:
@@ -33,7 +34,8 @@ exports.addTwitterAccount = (req, res) => {
             association: db.userTwitterAccounts,
         }]
     }).then(() => {
-        res.send(true)
+            req.session.passport.user.isFirstLogin = false;
+            res.send(true)
     }).catch((err) => {
         res.status(500).send({
             message:
@@ -98,8 +100,16 @@ exports.logout = (req, res) => {
 }
 
 exports.checkSession = (req, res) => {
-    if (req.session.passport && req.session.passport.user)
-        res.send({ IsAuthenticated: true })
+    if (req.session.passport && req.session.passport.user) {
+        let user = req.session.passport.user;
+        res.send({
+            id: user.id,
+            isAuthenticated: true,
+            isFirstLogin: user.isFirstLogin,
+            name: user.name,
+            providerName: user.providerName
+        })
+    }
     else
         res.send({ IsAuthenticated: false })
 }

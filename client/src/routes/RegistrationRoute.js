@@ -2,23 +2,26 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import authenticationService from '../services/authentication'
 
-class PublicRoute extends React.Component {
+class RegistrationRoute extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       loading: true,
       user: {
-        isAuthenticated: false,
-        isFirstLogin: false
+        isAuthenticated:false,
+        isFirstLogin:false
       }
     }
   }
 
   async componentDidMount() {
     let result = await authenticationService.IsLoggedIn();
+    debugger;
+    console.log(result);
     this.setState({
       user: result,
       loading: false,
+
     });
   }
 
@@ -30,15 +33,15 @@ class PublicRoute extends React.Component {
         render={props =>
           this.state.user.isAuthenticated ? (
             this.state.user.isFirstLogin ? (
-              <Redirect to={{ pathname: '/registration', state: { user: this.state.user, providerName: this.state.user.providerName } }} />
+              <Component {...props} />
             ) : (
-                <Redirect to={{ pathname: '/' }} />
+                <Redirect to={{ pathname: '/'}} />
               )
           ) : (
               this.state.loading ? (
                 <div></div>
               ) : (
-                  <Component {...props} />
+                  <Redirect to={{ pathname: '/login' }} />
                 )
             )
         }
@@ -46,4 +49,5 @@ class PublicRoute extends React.Component {
     )
   }
 }
-export default PublicRoute;
+
+export default RegistrationRoute;

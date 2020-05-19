@@ -7,15 +7,18 @@ class PrivateRoute extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      isAuthenticated: false
+      user: {
+        isAuthenticated:false,
+        isFirstLogin:false
+      }
     }
   }
 
   async componentDidMount() {
     let result = await authenticationService.IsLoggedIn();
     this.setState({
-      isAuthenticated: result,
-      loading: false
+      user: result,
+      loading: false,
     });
   }
 
@@ -25,11 +28,15 @@ class PrivateRoute extends React.Component {
       <Route
         {...rest}
         render={props =>
-          this.state.isAuthenticated ? (
-            <Component {...props} />
+          this.state.user.isAuthenticated ? (
+            this.state.user.isFirstLogin ? (
+              <Redirect to={{ pathname: '/registration', state: { user: this.state.user, providerName: this.state.user.providerName } }} />
+            ) : (
+                <Component {...props} />
+              )
           ) : (
               this.state.loading ? (
-                <div>LOADING</div>
+                <div></div>
               ) : (
                   <Redirect to={{ pathname: '/login' }} />
                 )

@@ -33,9 +33,9 @@ class Registration extends Component {
     event.preventDefault();
     axios.post(`${API_URL}/api/registration/${this.state.providerName}`, {
       user: this.state.user
-    })
+    }, { withCredentials: true })
       .then(res => {
-        history.push('/dashboard')
+        history.push('/')
       }).catch(err => {
         alert(`Error occured. ${err}`);
       });

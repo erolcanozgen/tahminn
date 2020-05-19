@@ -14,16 +14,7 @@ class OAuth extends Component {
             if (this.popup) {
                 this.popup.close();
             }
-
-            if (user.IsFirstLogin) {
-                history.push('/registration', {
-                    user: user, providerName: provider.name
-                })
-            }
-            else {
-                history.push('/')
-
-            }
+            history.push('/')
         })
     }
 

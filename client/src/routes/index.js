@@ -4,10 +4,14 @@ import Login from '../../src/components/login/login'
 import Dashboard from '../../src/components/dashboard/dashboard'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
+import RegistrationRoute from './RegistrationRoute'
 export default function Routes() {
     return (
         <Switch>
-            <Route path='/registration' component={Login}></Route>
+            <RegistrationRoute
+                path="/registration"
+                component={Login}
+            />
             <PublicRoute
                 path="/login"
                 component={Login}
@@ -16,6 +20,7 @@ export default function Routes() {
                 path="/"
                 component={Dashboard}
             />
+
         </Switch>
     );
 }
