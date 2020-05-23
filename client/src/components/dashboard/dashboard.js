@@ -1,22 +1,223 @@
 import React, { Component } from 'react'
-import history from '../../services/history'
-import axios from 'axios';
-import { API_URL } from '../login/components/loginPanel/config'
+import Navbar from '../navbar/navbar'
+import './dashboard.css'
+import $ from "jquery"
 
 class Dashboard extends Component {
 
-    logout = () => {
-        axios.get(`${API_URL}/api/logout/`, { withCredentials: true })
-            .then(res => {
-                history.push('/login');
+    updateDimensions = () => {
+        if (window.innerWidth < 576) {
+            $(".row.m-1").each(function(i, row) {
+                $(row).addClass("carousel-item");
+                $(row).removeClass("row");
+                $(row).removeClass("m-1");
+                $(row.parentElement).addClass("carousel-inner");
+                $(row.parentElement.parentElement).addClass("carousel slide");
             });
+        }
+        else {
+            $(".carousel-item").each(function(i, row) {
+                $(row).removeClass("carousel-item");
+                $(row).addClass("row");
+                $(row).addClass("m-1");
+                $(row.parentElement).removeClass("carousel-inner");
+                $(row.parentElement.parentElement).removeClass("carousel slide");
+            });
+        }
+    };
+    componentDidMount() {
+        window.addEventListener('resize', this.updateDimensions);
+        this.updateDimensions();
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions);
     }
 
     render() {
+
         return (
-            <div >
-                DASHBOARD
-                <button type="submit" onClick={() => { this.logout() }} className="btn btn-primary btn-block"> Logout  </button>
+            <div>
+                <Navbar></Navbar>
+                <div className="container">
+                    <div className="row" data-ride="carousel" data-interval="false" id="prediction-carousel">
+                        <ol class="carousel-indicators d-sm-none">
+                            <li data-target="#prediction-carousel" data-slide-to="0" class="active">Recommended</li>
+                            <li data-target="#prediction-carousel" data-slide-to="1">Hot Topics</li>
+                            <li data-target="#prediction-carousel" data-slide-to="2">Random</li>
+                        </ol>
+                        <div className="col-12 col-md-9 mt-5 mt-sm-0 pt-5 pt-sm-0">
+                            <div className="row m-1 mt-4 mt-sm-1 active">
+                                <div className="row">
+                                    <h4 className="col-12 d-none d-sm-block">Recommended For You</h4>
+                                    <div className="col-6 p-1">
+                                        <div className="col-12 bg-light prediction-tile tile-big">
+                                            Recommended Prediction
+                                        </div>                
+                                    </div>
+                                    <div className="col-6 p-1">
+                                        <div className="col-12 bg-light prediction-tile tile-big">
+                                            Recommended Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Recommended Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Recommended Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Recommended Prediction
+                                        </div>                
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Recommended Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Recommended Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Recommended Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Recommended Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Recommended Prediction
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row m-1 mt-4 mt-sm-1 ">
+                                <div className="row">
+                                    <h4 className="col-12 d-none d-sm-block">Hot Topics</h4>
+                                    <div className="col-6 p-1">
+                                        <div className="col-12 bg-light prediction-tile tile-big">
+                                            Prediction from Hot Topic
+                                        </div>                
+                                    </div>
+                                    <div className="col-6 p-1">
+                                        <div className="col-12 bg-light prediction-tile tile-big">
+                                            Prediction from Hot Topic
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Prediction from Hot Topic
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Prediction from Hot Topic
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Prediction from Hot Topic
+                                        </div>                
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Prediction from Hot Topic
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Prediction from Hot Topic
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Prediction from Hot Topic
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Prediction from Hot Topic
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Prediction from Hot Topic
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row m-1 mt-4 mt-sm-1 ">
+                                <div className="row">
+                                    <h4 className="col-12 d-none d-sm-block">Random Predictions</h4>
+                                    <div className="col-6 p-1">
+                                        <div className="col-12 bg-light prediction-tile tile-big">
+                                            Random Prediction
+                                        </div>                
+                                    </div>
+                                    <div className="col-6 p-1">
+                                        <div className="col-12 bg-light prediction-tile tile-big">
+                                            Random Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Random Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Random Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Random Prediction
+                                        </div>                
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Random Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Random Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Random Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Random Prediction
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-sm-4 col-md-3 p-1">
+                                        <div className="col-12 bg-light prediction-tile">
+                                            Random Prediction
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="activity-pane" className="col-6 col-sm-4 col-md-3 d-none d-sm-block">
+                            <h4>Activity</h4>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

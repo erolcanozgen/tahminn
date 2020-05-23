@@ -4,9 +4,6 @@
 }
 
 @media(max-width:768px) {
-    body {
-        padding-top: 15px;
-    }
 
     .mlt-content {
         -webkit-border-radius: 12px;

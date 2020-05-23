@@ -1,0 +1,50 @@
+body {
+    background-color: #eeeeee;
+    font-family: sans-serif;
+}
+
+#activity-pane {
+    border-left: 1px solid #f8f8f8;
+}
+
+.prediction-tile {
+    height: 75px;
+    border: 2px solid #68B0AB;
+    border-radius: 5px;
+}
+
+.tile-big {
+    height: 150px;
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: flex;
+}
+
+ol.carousel-indicators {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    margin-top: 75px;
+    left: 0;
+    right: 0;
+    width: auto;
+}
+
+.carousel-indicators li {
+    width: 30%;
+    text-indent: 0;
+    text-align: center;
+    height: 25px;
+    background-color: #eeeeee;
+    margin: 0;
+    padding: 3px;
+    border: 2px solid #aaaaaa;
+    border-collapse: collapse;
+}
+.carousel-indicators .active {
+    background-color: #004899;
+    color: white;
+}
