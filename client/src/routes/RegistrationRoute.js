@@ -16,8 +16,6 @@ class RegistrationRoute extends React.Component {
 
   async componentDidMount() {
     let result = await authenticationService.IsLoggedIn();
-    debugger;
-    console.log(result);
     this.setState({
       user: result,
       loading: false,
@@ -41,7 +39,7 @@ class RegistrationRoute extends React.Component {
               this.state.loading ? (
                 <div></div>
               ) : (
-                  <Redirect to={{ pathname: '/login' }} />
+                  <Redirect to={{ pathname: '/' }} />
                 )
             )
         }

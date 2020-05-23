@@ -6,8 +6,8 @@ const authenticationService = {
         let result = await axios.get(`${API_URL}/api/login/checkSession`, { withCredentials: true })
         return {
             id: result.data.id,
-            isAuthenticated: result.data.isAuthenticated,
-            isFirstLogin: result.data.isFirstLogin,
+            isAuthenticated: result.data.isAuthenticated ? result.data.isAuthenticated : false,
+            isFirstLogin: result.data.isFirstLogin ? result.data.isFirstLogin : false,
             name: result.data.name,
             providerName: result.data.providerName
         };
