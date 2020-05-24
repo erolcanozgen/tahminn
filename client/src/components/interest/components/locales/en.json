@@ -7,6 +7,21 @@
         "serieA": "Serie A",
         "turkishLeague": "Turkish Super League",
         "worldCup": "FIFA World Cup",
-        "europeanChampionship": "UEFA European Championship"
+        "europeanChampionship": "UEFA European Championship",
+        "nba":"NBA",
+        "euroleague":"Euroelague",
+        "eurocup": "Eurocup",
+        "tbl": "Turkish Basketball League",
+        "FIBA World Cup": "FIBA World Cup",
+        "eurobasket": "European Basketball Champiponship",
+        "wimbledon": "Wimbledon",
+        "rolandgarros": "Roland Garros",
+        "usopen": "US Open",
+        "australianopen": "Australian Open",
+        "formula1": "F1",
+        "motogp": "Moto GP",
+        "fenerbahce": "Fenerbahce",
+        "galatasaray": "Galatasaray",
+        "besiktas": "Besiktas"
     }
 }

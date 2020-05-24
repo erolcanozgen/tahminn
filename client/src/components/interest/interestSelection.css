@@ -4,6 +4,10 @@
     margin: auto;
 } */
 
+.border {
+    border: 30px ridge #1C6EA4;
+    border-radius: 40px;
+    }
 
 
 .row {
@@ -16,15 +20,6 @@
     padding: 8px;
 }
 
-/* Create three equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 18%;
-    display: block;
-    margin: 1%;
-    background-color: #eeeeee;
-}
-
 /* Clear floats after rows */
 .row:after {
     content: "";
@@ -32,43 +27,31 @@
     clear: both;
 }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-    .column {
-      flex: 31%;
-      max-width: 31%;
-    }
-  }
-  
-  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    flex: 48%;
-    max-width: 48%;
-  }
+
+.hidden{
+    display: none;
 }
 
-/* The "show" class is added to the filtered elements */
-/* .show {
+ .show {
     display: block;
-} */
+} 
 
 /* Style the buttons */
-/* .btn {
+.btn {
     border: none;
     outline: none;
     padding: 12px 16px;
     background-color: white;
     cursor: pointer;
-} */
+}
 
 /* Add a grey background color on mouse-over */
-/* .btn:hover {
+.btn:hover {
     background-color: #ddd;
-} */
+}
 
 /* Add a dark background color to the active button */
-/* .btn.active {
+.btn.active {
     background-color: #666;
     color: white;
-} */
+}
