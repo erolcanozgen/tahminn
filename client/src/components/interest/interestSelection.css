@@ -1,14 +1,12 @@
-/* Center website */
-/* .main {
-    max-width: 1000px;
-    margin: auto;
-} */
+#categoriesDiv {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
-.border {
-    border: 30px ridge #1C6EA4;
-    border-radius: 40px;
-    }
-
+#submitButtonsDiv {
+    overflow: auto;
+}
 
 .row {
     margin: 8px -16px;
@@ -20,6 +18,18 @@
     padding: 8px;
 }
 
+.margin {
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.floatRight {
+    float: right;
+    margin-right: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
 /* Clear floats after rows */
 .row:after {
     content: "";
@@ -27,17 +37,23 @@
     clear: both;
 }
 
+.container {
+    overflow: hidden;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
 
-.hidden{
+.hidden {
     display: none;
 }
 
- .show {
+.show {
     display: block;
-} 
+}
+
 
 /* Style the buttons */
-.btn {
+.categoryButtons {
     border: none;
     outline: none;
     padding: 12px 16px;
@@ -46,12 +62,12 @@
 }
 
 /* Add a grey background color on mouse-over */
-.btn:hover {
+.categoryButtons:hover {
     background-color: #ddd;
 }
 
 /* Add a dark background color to the active button */
-.btn.active {
+.categoryButtons.active {
     background-color: #666;
     color: white;
 }

@@ -5,6 +5,9 @@
         "basketball": "Basketbol",
         "tennis": "Tenis",
         "motorsports": "Motor Sporları",
-        "teams": "Takımlar"
+        "teams": "Takımlar",
+        "continueText": "Devam Etmek İçin {{-numberOfRemainingItems}} Konu Daha Seçin",
+        "interestQuestion": "Hangi konularla ilgileniyorsunuz?",
+        "finish": "Finish"
     }
 }

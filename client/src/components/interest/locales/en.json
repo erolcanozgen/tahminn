@@ -5,6 +5,9 @@
         "basketball": "Basketball",
         "tennis": "Tennis",
         "motorsports": "Motor Sports",
-        "teams": "Teams"
+        "teams": "Teams",
+        "continueText": "Follow {{-numberOfRemainingItems}} More Topic To Continue",
+        "interestQuestion": "What are your interests?",
+        "finish": "Bitir"
     }
 }
