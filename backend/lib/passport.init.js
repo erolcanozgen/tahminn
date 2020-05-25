@@ -1,6 +1,7 @@
 const passport = require('passport')
 const { OAuth2Strategy: GoogleStrategy } = require('passport-google-oauth')
 const { Strategy: TwitterStrategy } = require('passport-twitter')
+const db = require("../app/models");
 const {
     TWITTER_CONFIG, GOOGLE_CONFIG
 } = require('../config')
@@ -8,8 +9,52 @@ const {
 module.exports = () => {
 
     // Allowing passport to serialize and deserialize users into sessions
-    passport.serializeUser((user, cb) => cb(null, user))
-    passport.deserializeUser((obj, cb) => cb(null, obj))
+    passport.serializeUser((user, cb) => {
+        let _isFirstLogin = true;
+        switch (user.provider) {
+            case 'google':
+                db.google_account.findByPk(user.id, {
+                    include: [
+                        {
+                            model: db.user,
+                        }
+                    ],
+                }).then((account) => {
+                    if (account) {
+                        _isFirstLogin = false;
+                        _name = account.user.name;
+                    }
+                    else {
+                        _name = user.displayName;
+                    }
+                    cb(null, { providerName: user.provider, id: user.id, name: _name, isFirstLogin: _isFirstLogin })
+                });
+                break;
+            case 'twitter':
+                db.twitter_account.findByPk(user.id, {
+                    include: [
+                        {
+                            model: db.user,
+                        }
+                    ],
+                }).then((account) => {
+                    if (account) {
+                        _isFirstLogin = false;
+                        _name = account.user.name;
+                    }
+                    else {
+                        _name = user.username;
+                    }
+                    cb(null, { providerName: user.provider, id: user.id, name: _name, isFirstLogin: _isFirstLogin })
+                });
+                break;
+
+        }
+
+    })
+    passport.deserializeUser((obj, cb) => {
+        cb(null, obj)
+    })
 
     // The callback that is invoked when an OAuth provider sends back user 
     // information. Normally, you would save the user to the database 

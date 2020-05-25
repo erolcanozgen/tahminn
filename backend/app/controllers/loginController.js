@@ -1,29 +1,5 @@
 const db = require("../models");
 
-exports.loginWithGoogle = (req, res) => {
-    // Validate request
-    if (!req.body.id) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-    db.google_account.findByPk(req.body.id, {
-        include: [
-            {
-                model: db.user,
-            }
-        ],
-    }).then((account) => {
-        res.send(account)
-    }).catch((err) => {
-        res.status(500).send({
-            message:
-                err.message || "error occurred while getting the google account."
-        });
-    });
-};
-
 exports.addGoogleAccount = (req, res) => {
     const googleAccount = req.body.user;
     db.google_account.create({
@@ -36,6 +12,7 @@ exports.addGoogleAccount = (req, res) => {
             association: db.userGoogleAccounts,
         }]
     }).then(() => {
+        req.session.passport.user.isFirstLogin = false;
         res.send(true)
     }).catch((err) => {
         res.status(500).send({
@@ -44,30 +21,6 @@ exports.addGoogleAccount = (req, res) => {
         });
     });
 }
-
-exports.loginWithTwitter = (req, res) => {
-    // Validate request
-    if (!req.body.id) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-    db.twitter_account.findByPk(req.body.id, {
-        include: [
-            {
-                model: db.user,
-            }
-        ],
-    }).then((account) => {
-        res.send(account)
-    }).catch((err) => {
-        res.status(500).send({
-            message:
-                err.message || "error occurred while getting the twitter account."
-        });
-    });
-};
 
 exports.addTwitterAccount = (req, res) => {
     const twitterAccount = req.body.user;
@@ -81,6 +34,7 @@ exports.addTwitterAccount = (req, res) => {
             association: db.userTwitterAccounts,
         }]
     }).then(() => {
+        req.session.passport.user.isFirstLogin = false;
         res.send(true)
     }).catch((err) => {
         res.status(500).send({
@@ -88,4 +42,64 @@ exports.addTwitterAccount = (req, res) => {
                 err.message || "error occurred while creating the user account."
         });
     });
+}
+
+exports.oauthCallbackForGoogle = (req, res) => {
+    const io = req.app.get('io')
+
+    db.google_account.findByPk(req.user.id, {
+        include: [
+            {
+                model: db.user,
+            }
+        ],
+    }).then(() => {
+        io.in(req.session.socketId).emit('google')
+        res.end()
+    }).catch((err) => {
+        res.status(500).send({
+            message:
+                err.message || "error occurred while getting the google account."
+        });
+    });
+}
+
+exports.oauthCallbackForTwitter = (req, res) => {
+    const io = req.app.get('io')
+    db.twitter_account.findByPk(req.user.id, {
+        include: [
+            {
+                model: db.user,
+            }
+        ],
+    }).then(() => {
+        io.in(req.session.socketId).emit('twitter')
+        res.end();
+    }).catch((err) => {
+        res.status(500).send({
+            message:
+                err.message || "error occurred while getting the twitter account."
+        });
+    });
+}
+
+
+exports.logout = (req, res) => {
+    req.session.destroy();
+    res.end()
+}
+
+exports.checkSession = (req, res) => {
+    if (req.session.passport && req.session.passport.user) {
+        let user = req.session.passport.user;
+        res.send({
+            id: user.id,
+            isAuthenticated: true,
+            isFirstLogin: user.isFirstLogin,
+            name: user.name,
+            providerName: user.providerName
+        })
+    }
+    else
+        res.send({ IsAuthenticated: false })
 }

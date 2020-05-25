@@ -5,6 +5,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_URL } from '../loginPanel/config'
 import { withTranslation } from 'react-i18next';
+import history from '../../../../services/history'
 
 class Registration extends Component {
   state = {
@@ -28,13 +29,13 @@ class Registration extends Component {
     }
   }
 
-  addUser = () => {
-
+  addUser = (event) => {
+    event.preventDefault();
     axios.post(`${API_URL}/api/registration/${this.state.providerName}`, {
       user: this.state.user
-    })
+    }, { withCredentials: true })
       .then(res => {
-        alert('Welcome to Party !!!')
+        history.push('/')
       }).catch(err => {
         alert(`Error occured. ${err}`);
       });
@@ -49,10 +50,11 @@ class Registration extends Component {
             <div className="input-group-prepend">
               <span className="input-group-text"> <FontAwesomeIcon icon={faUser} /></span>
             </div>
-            <input className="form-control" placeholder="Full name" type="text" value={this.state.user.name} onChange={(e) => { this.handleChange(e) }} />
+            <input className="form-control" placeholder="Full name" type="text" value={this.state.user ? this.state.user.name : ""}
+              onChange={(e) => { this.handleChange(e) }} />
           </div>
           <div className="form-group">
-            <button type="submit" onClick={() => { this.addUser() }} className="btn btn-primary btn-block"> {t('Login.registration')}  </button>
+            <button type="submit" onClick={(event) => { this.addUser(event) }} className="btn btn-primary btn-block"> {t('Login.registration')}  </button>
           </div>
         </form>
       </div>
