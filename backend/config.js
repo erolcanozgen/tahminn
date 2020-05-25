@@ -2,14 +2,14 @@ const providers = ['google', 'twitter']
 
 const callbacks = providers.map(provider => {
     return process.env.NODE_ENV === 'production'
-        ? `http://tahminn.herokuapp.com/${provider}/callback`
-        : `http://localhost:8080/${provider}/callback`
+        ? `http://tahminn.herokuapp.com/api/login/oauth/${provider}/callback`
+        : `http://localhost:8080/api/login/oauth/${provider}/callback`
 })
 
 const [googleURL, twitterURL] = callbacks
 
 exports.CLIENT_ORIGIN = process.env.NODE_ENV === 'production'
-    ? 'http://tahminn.herokuapp.com'
+    ? ['http://tahminn.herokuapp.com','http://www.tahminn.com']
     : ['http://127.0.0.1:3000', 'http://localhost:3000']
 
 exports.GOOGLE_CONFIG = {

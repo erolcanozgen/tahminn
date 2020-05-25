@@ -36,7 +36,7 @@ class LoginPanel extends Component {
       )
 
     return (
-      <div id="login-panel" className="d-flex justify-content-center align-items-center" style={{ height: "100%" }}>
+      <div id="login-panel" className="d-flex justify-content-center align-items-center w-100">
         <div className="text-center site-name w-50">
           <img id="site-name-img" className="img-responsive" src={siteNameImg} alt="site-name-image" />
         </div>

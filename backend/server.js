@@ -8,7 +8,6 @@ const passport = require('passport')
 const session = require('express-session')
 const cors = require('cors')
 const socketio = require('socket.io')
-const authRouter = require('./lib/auth.router')
 const passportInit = require('./lib/passport.init')
 const { SESSION_SECRET, CLIENT_ORIGIN } = require('./config')
 const db = require('./app/models')
@@ -26,7 +25,8 @@ passportInit()
 
 // Accept requests from our client
 app.use(cors({
-    origin: CLIENT_ORIGIN
+    origin: CLIENT_ORIGIN,
+    credentials: true
 }))
 
 // saveUninitialized: true allows us to attach the socket id to the session
@@ -46,7 +46,6 @@ app.set('io', io)
 
 app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
-app.use('/', authRouter);
 
 routes.loginRoutes(app);
 
@@ -55,7 +54,7 @@ routes.loginRoutes(app);
 // if new table(s) will be added use db.connection.sync({force: false})
 // if there are changes on already exsisting table such as column changes, db.connection.sync({force: true})
 // Be careful !! while using db.connection.sync({force: true}) because it will remove all contents from the all tables
-db.connection.sync({force: false})
+db.connection.sync({ force: false })
 
 
 server.listen(process.env.PORT || 8080, () => {

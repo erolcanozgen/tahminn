@@ -11,7 +11,7 @@ class Logo extends Component {
       <div className="mlt-carousel">
             <div className="item">
                 <img id="login-logo" className="img-responsive center-block" src={loginLogo} alt="loginLogo"/>
-                <div className="item-content">
+                <div className="item-content d-none d-sm-block">
                       <h3>Lorem ipsum dolor sit amet</h3>
                       <p>Consectetur adipiscing elit</p>
                       <p>Phasellus orci dolor</p>

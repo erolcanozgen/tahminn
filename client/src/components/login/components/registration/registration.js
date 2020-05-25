@@ -29,11 +29,11 @@ class Registration extends Component {
     }
   }
 
-  addUser = () => {
-
+  addUser = (event) => {
+    event.preventDefault();
     axios.post(`${API_URL}/api/registration/${this.state.providerName}`, {
       user: this.state.user
-    })
+    }, { withCredentials: true })
       .then(res => {
         history.push('/interest', {
           user: this.state.user
@@ -46,16 +46,17 @@ class Registration extends Component {
   render() {
     const { t } = this.props;
     return (
-      <div className="d-flex justify-content-center align-items-center row" style={{ height: "100%" }}>
+      <div className="d-flex justify-content-center align-items-center w-100" style={{ height: "90%" }}>
         <form>
           <div className="form-group input-group">
             <div className="input-group-prepend">
               <span className="input-group-text"> <FontAwesomeIcon icon={faUser} /></span>
             </div>
-            <input className="form-control" placeholder="Full name" type="text" value={this.state.user.name} onChange={(e) => { this.handleChange(e) }} />
+            <input className="form-control" placeholder="Full name" type="text" value={this.state.user ? this.state.user.name : ""}
+              onChange={(e) => { this.handleChange(e) }} />
           </div>
           <div className="form-group">
-            <button type="submit" onClick={() => { this.addUser() }} className="btn btn-primary btn-block"> {t('Login.registration')}  </button>
+            <button type="submit" onClick={(event) => { this.addUser(event) }} className="btn btn-primary btn-block"> {t('Login.registration')}  </button>
           </div>
         </form>
       </div>
