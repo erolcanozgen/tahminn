@@ -105,7 +105,7 @@ class InterestSelection extends Component {
         </div>
         <div id="submitButtonsDiv" className="border border-dark">
           {
-            this.state.numberOfRemainingItems == 0 ?
+            this.state.numberOfRemainingItems <= 0 ?
               (<button type="button" className="btn btn-primary floatRight" onClick={this.redirectToHomePage} >{t('InterestSelection.finish')}</button>)
               :
               (<button type="button" className="btn btn-primary disabled floatRight">{t('InterestSelection.continueText',
