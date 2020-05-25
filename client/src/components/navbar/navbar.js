@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import history from '../../services/history'
 import axios from 'axios';
 import { API_URL } from '../login/components/loginPanel/config'
+import site_icon from '../../assets/icons/navbar-brand.png'
 
 class Navbar extends Component {
 
@@ -18,8 +19,11 @@ class Navbar extends Component {
     render() {
         return (
             <div >
-                <nav class="navbar navbar-expand navbar-dark bg-black top-colored p-0">
+                <nav class="navbar navbar-expand navbar-dark bg-navbar top-colored p-0">
                     <div class="navbar-collapse collapse container" id="main-navbar">
+                        <a class="navbar-brand d-none d-md-inline-block" href="/">
+                            <img id="navbar-site-logo" className="center-block" width="167" height="32" src={site_icon} alt="navbar-site-logo" />
+                        </a>
                         <ul class="navbar-nav w-100">
                             <li class="nav-item text-center">
                                 <a href="#" class="nav-link" data-toggle="modal" data-target="#">

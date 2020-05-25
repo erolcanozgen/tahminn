@@ -1,6 +1,29 @@
+@media(min-width:576px) {
+    .sm-square-tile {
+        padding-bottom: 100%;
+    }
+}
+@media(min-width:768px) {
+    .md-square-tile {
+        padding-bottom: 100%;
+    }
+}
+
 body {
     background-color: #eeeeee;
     font-family: sans-serif;
+}
+
+h6 {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
+
+h6::after {
+    content: ' ';
+    display: block;
+    margin-top: 0.3em;
+    border-bottom: 2px solid white;
 }
 
 #activity-pane {
@@ -9,18 +32,21 @@ body {
 
 .prediction-tile {
     height: 75px;
-    border: 2px solid #68B0AB;
     border-radius: 5px;
 }
 
-.tile-big {
-    height: 150px;
+.square-tile {
+    padding-bottom: 100% !important;
 }
 
 .carousel-item.active,
 .carousel-item-next,
 .carousel-item-prev {
-  display: flex;
+    display: flex;
+}
+
+.carousel-item {
+    transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
 }
 
 ol.carousel-indicators {
@@ -42,6 +68,7 @@ ol.carousel-indicators {
     margin: 0;
     padding: 3px;
     border: 2px solid #aaaaaa;
+    margin-left: -2px;
     border-collapse: collapse;
 }
 .carousel-indicators .active {
