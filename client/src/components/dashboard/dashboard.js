@@ -37,11 +37,11 @@ class Dashboard extends Component {
 
         return (
             <div>
-                <Navbar></Navbar>
+                <Navbar user={this.props.user} ></Navbar>
                 <div className="container">
                     <div className="row" data-ride="carousel" data-interval="false" id="prediction-carousel">
-                        <ol class="carousel-indicators d-sm-none">
-                            <li data-target="#prediction-carousel" data-slide-to="0" class="active">Recommended</li>
+                        <ol className="carousel-indicators d-sm-none">
+                            <li data-target="#prediction-carousel" data-slide-to="0" className="active">Recommended</li>
                             <li data-target="#prediction-carousel" data-slide-to="1">Hot Topics</li>
                             <li data-target="#prediction-carousel" data-slide-to="2">Leaderboards</li>
                         </ol>

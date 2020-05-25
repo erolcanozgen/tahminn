@@ -43,3 +43,7 @@
 .nav-link {
     font-size: 0.85em;
 }
+
+.btn-block + .btn-block {
+    margin-top: 0;
+}
