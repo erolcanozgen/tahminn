@@ -3,17 +3,9 @@
     text-decoration: underline
 }
 
-@media(max-width:768px) {
-
-    .mlt-content {
-        -webkit-border-radius: 12px;
-        -moz-border-radius: 12px;
-        border-radius: 12px;
-    }
-}
-
 #login-panel{
     flex-direction: column;
+    height: 90%;
 }
 
 #site-name-img{

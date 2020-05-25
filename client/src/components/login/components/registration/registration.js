@@ -44,7 +44,7 @@ class Registration extends Component {
   render() {
     const { t } = this.props;
     return (
-      <div className="d-flex justify-content-center align-items-center row" style={{ height: "100%" }}>
+      <div className="d-flex justify-content-center align-items-center w-100" style={{ height: "90%" }}>
         <form>
           <div className="form-group input-group">
             <div className="input-group-prepend">
