@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import authenticationService from '../services/authentication'
 
-class DashboardRoute extends React.Component {
+class LayoutRoute extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -47,4 +47,4 @@ class DashboardRoute extends React.Component {
     }
 }
 
-export default DashboardRoute;
+export default LayoutRoute;
