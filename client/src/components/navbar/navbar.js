@@ -23,9 +23,10 @@ class Navbar extends Component {
         this.setState({ user })
     }
 
-    login = () => {
-        history.push('/login');
+    navigate = (path) => {
+        history.push(`/${path}`);
     }
+
 
     logout = () => {
         axios.get(`${API_URL}/api/logout/`, { withCredentials: true })
@@ -80,12 +81,12 @@ class Navbar extends Component {
                         </form>
                         <ul className="navbar-nav d-none d-sm-flex">
                             <li style={{ display: logoutButtonDisplay }} className="nav-item text-center">
-                                <a href="#" className="nav-link" data-toggle="modal" data-target="#">
+                                <a className="nav-link" data-toggle="modal" onClick={() => { this.navigate("profile") }}>
                                     <FontAwesomeIcon className="d-inline-block" icon={faUser} />
                                 </a>
                             </li>
                             <li className="nav-item text-center">
-                                <button type="submit" style={{ display: loginButtonDisplay }} onClick={() => { this.login() }} className="btn btn-block nav-link align-items-center"><FontAwesomeIcon className="d-inline-block mr-2" icon={faSignInAlt} /> Login</button>
+                                <button type="submit" style={{ display: loginButtonDisplay }} onClick={() => { this.navigate("login") }} className="btn btn-block nav-link align-items-center"><FontAwesomeIcon className="d-inline-block mr-2" icon={faSignInAlt} /> Login</button>
                                 <button type="submit" style={{ display: logoutButtonDisplay }} onClick={() => { this.logout() }} className="btn btn-block nav-link"><FontAwesomeIcon className="d-inline-block" icon={faSignOutAlt} /></button>
                             </li>
                         </ul>
