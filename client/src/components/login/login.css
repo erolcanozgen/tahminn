@@ -13,7 +13,7 @@
     }
 }
 @media(min-width:576px) {
-    .row {
+    .sm-align-items-center {
         align-items: center !important;
     }
     .mlt-content {

@@ -1,0 +1,16 @@
+body {
+    background-color: #eeeeee;
+    font-family: sans-serif;
+}
+
+h6 {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
+
+h6::after {
+    content: ' ';
+    display: block;
+    margin-top: 0.3em;
+    border-bottom: 2px solid white;
+}
