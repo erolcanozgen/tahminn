@@ -1,0 +1,44 @@
+@media(min-width:768px) {
+    .activity-tile h5 {
+        font-size: 0.7em;
+        font-weight: bold;
+    }
+    .activity-tile p{
+        font-size: 0.6em;
+    }
+}
+@media(min-width:992px) {
+    .activity-tile h5 {
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    .activity-tile p{
+        font-size: 0.7em;
+    }
+}
+
+#activity-pane {
+    border-left: 1px solid #f8f8f8;
+}
+
+.activity-tile {
+    height: 75px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.activity-user-img {
+    border: 1px solid #e1e1e1;
+    padding: 4px;
+    border-radius: 50%;
+    max-height: 55px;
+    float: left;
+    margin-right: 10px;
+}
+
+.activity-tile h5,
+.activity-tile p{
+    margin-left: 55px;
+    display: block;
+    margin: 2px 0 0 0;
+}

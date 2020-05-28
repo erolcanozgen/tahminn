@@ -9,10 +9,6 @@
     }
 }
 
-#activity-pane {
-    border-left: 1px solid #f8f8f8;
-}
-
 .prediction-tile {
     height: 75px;
     border-radius: 5px;
