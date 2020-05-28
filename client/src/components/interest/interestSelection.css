@@ -37,12 +37,6 @@
     clear: both;
 }
 
-.container {
-    overflow: hidden;
-    margin-top: 10%;
-    margin-bottom: 10%;
-}
-
 .hidden {
     display: none;
 }

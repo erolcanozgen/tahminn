@@ -4,7 +4,7 @@ import { faQuestion, faShareAlt, faTrophy, faSearch, faUser, faSignOutAlt, faSig
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import history from '../../services/history'
 import axios from 'axios';
-import { API_URL } from '../login/components/loginPanel/config'
+import { API_URL } from '../config'
 import site_icon from '../../assets/icons/navbar-brand.png'
 
 class Navbar extends Component {

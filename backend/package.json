@@ -1,5 +1,5 @@
 {
-    "name": "tahimm-server",
+    "name": "tahmin-server",
     "version": "0.0.1",
     "description": "Server for tahminn",
     "main": "server.js",

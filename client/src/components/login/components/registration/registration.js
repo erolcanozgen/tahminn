@@ -3,7 +3,7 @@ import './registration.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { API_URL } from '../loginPanel/config'
+import { API_URL } from '../../../config'
 import { withTranslation } from 'react-i18next';
 import history from '../../../../services/history'
 

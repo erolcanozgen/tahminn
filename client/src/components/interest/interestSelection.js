@@ -1,20 +1,26 @@
 import React, { Component } from "react";
 import "./interestSelection.css";
-import interests from "./sources";
 import { withTranslation } from "react-i18next";
 import "./interest";
 import TranslatedInterest from "./interest";
 import history from '../../services/history'
-
+import { API_URL } from '../config'
+import axios from 'axios'
 
 class InterestSelection extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      interests: [],
       numberOfTotalItems: 5,
       numberOfRemainingItems: 5
     }
+  }
+
+  async componentDidMount() {
+    let interests = await this.getAllInterests();
+    this.setState({ interests: interests })
   }
 
   getNumberOfRemainingItems = () => {
@@ -22,8 +28,23 @@ class InterestSelection extends Component {
     this.setState({ numberOfRemainingItems: this.state.numberOfTotalItems - numberOfCheckedItems })
   }
 
+  async getAllInterests() {
+    let interests = await axios.get(`${API_URL}/api/interest/getAllInterests`);
+    var interestJson = [];
+    interests.data.map(function (interest) {
+      interestJson.push({
+        "id": interest.id,
+        "type": interest.name,
+        "imgSource": interest.imageUrl.toString(),
+        "category": interest.category.name
+      });
+    });
+
+    return interestJson;
+  }
+
   interestByCategories(category) {
-    return interests.filter((x) => x.category == category).map((interest) => (
+    return this.state.interests.filter((x) => x.category == category).map((interest) => (
       <TranslatedInterest
         onChange={this.getNumberOfRemainingItems}
         type={interest.type}
