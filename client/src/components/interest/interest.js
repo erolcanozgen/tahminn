@@ -32,7 +32,7 @@ class Interest extends Component {
                         <div className="checkmark_kick"></div>
                     </span>
                     <img src={require("" + this.props.imgSource)} alt={t('Interest.' + this.props.type)} style={{ width: "100%" }} />
-                    <label className="text-center w-100" >{t('Interest.' + this.props.type)}</label>
+                    <label data-id={this.props.id} className="text-center w-100" >{t('Interest.' + this.props.type)}</label>
                 </div>
             </div>
 

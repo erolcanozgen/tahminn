@@ -47,6 +47,7 @@ class InterestSelection extends Component {
     return this.state.interests.filter((x) => x.category == category).map((interest) => (
       <TranslatedInterest
         onChange={this.getNumberOfRemainingItems}
+        id={interest.id}
         type={interest.type}
         imgSource={interest.imgSource}
         category={interest.category}
@@ -89,6 +90,12 @@ class InterestSelection extends Component {
   }
 
   redirectToHomePage() {
+    let selectedInterests = document.getElementsByClassName("checked");
+    let selectedInterestIds = [];
+    for (let selectedInterest of selectedInterests) {
+      let id = selectedInterest.querySelector("label").getAttribute("data-id");
+      selectedInterestIds.push(id);
+    }
     history.push('/');
   }
 
