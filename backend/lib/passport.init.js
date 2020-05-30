@@ -23,11 +23,13 @@ module.exports = () => {
                     if (account) {
                         _isFirstLogin = false;
                         _name = account.user.name;
+                        _id = account.user.id;
                     }
                     else {
                         _name = user.displayName;
+                        _id = user.id;
                     }
-                    cb(null, { providerName: user.provider, id: user.id, name: _name, isFirstLogin: _isFirstLogin })
+                    cb(null, { providerName: user.provider, id: _id, name: _name, isFirstLogin: _isFirstLogin })
                 });
                 break;
             case 'twitter':
@@ -41,11 +43,13 @@ module.exports = () => {
                     if (account) {
                         _isFirstLogin = false;
                         _name = account.user.name;
+                        _id = account.user.id;
                     }
                     else {
                         _name = user.username;
+                        _id = user.id;
                     }
-                    cb(null, { providerName: user.provider, id: user.id, name: _name, isFirstLogin: _isFirstLogin })
+                    cb(null, { providerName: user.provider, id: _id, name: _name, isFirstLogin: _isFirstLogin })
                 });
                 break;
 

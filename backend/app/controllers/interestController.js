@@ -11,3 +11,18 @@ exports.getAllInterests = (req, res) => {
         });
     });
 }
+
+exports.addInterests = (req, res) => {
+    if (req.session.passport && req.session.passport.user) {
+        let user = req.session.passport.user;
+        db.user.findByPk(user.id).then((user) => {
+            user.setInterests(req.body.interests);
+            res.end();
+        });
+    }
+    else {
+        res.status(500).send({
+            message: "Unauthorized access !."
+        });
+    }
+}

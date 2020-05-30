@@ -11,8 +11,9 @@ exports.addGoogleAccount = (req, res) => {
         include: [{
             association: db.userGoogleAccounts,
         }]
-    }).then(() => {
+    }).then((account) => {
         req.session.passport.user.isFirstLogin = false;
+        req.session.passport.user.id = account.user.id;
         res.send(true)
     }).catch((err) => {
         res.status(500).send({
@@ -35,6 +36,7 @@ exports.addTwitterAccount = (req, res) => {
         }]
     }).then(() => {
         req.session.passport.user.isFirstLogin = false;
+        req.session.passport.user.id = account.user.id;
         res.send(true)
     }).catch((err) => {
         res.status(500).send({

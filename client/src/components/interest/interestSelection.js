@@ -96,7 +96,14 @@ class InterestSelection extends Component {
       let id = selectedInterest.querySelector("label").getAttribute("data-id");
       selectedInterestIds.push(id);
     }
-    history.push('/');
+    axios.post(`${API_URL}/api/interest/addInterests`, {
+      interests: selectedInterestIds
+    }, { withCredentials: true })
+      .then(res => {
+        history.push('/');
+      }).catch(err => {
+        alert(`Error occured. ${err}`);
+      });
   }
 
   render() {
