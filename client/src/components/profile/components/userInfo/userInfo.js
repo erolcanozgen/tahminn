@@ -4,7 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './userInfo.css'
 
 class UserInfo extends Component {
-    state = {
+    constructor(props) {
+        super(props)
+        this.state = {
+            user: {}
+        }
+    }
+
+    componentDidMount() {
+        const { user } = this.props;
+        this.setState({ user });
     }
 
     render() {
@@ -23,7 +32,7 @@ class UserInfo extends Component {
                                     User Name:
                                 </div>
                                 <div className="profile-user-details-value">
-                                    John Doe
+                                    {this.state.user ? this.state.user.name : "" }
                                 </div>
                             </div>
                             <div className="profile-user-details clearfix">
@@ -103,7 +112,7 @@ class UserInfo extends Component {
                                 </li>
                                 <li className="col-md-6">
                                     <div className="img">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="50px"  alt=""></img>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="50px" alt=""></img>
                                     </div>
                                     <div className="details">
                                         <div className="name">
@@ -113,7 +122,7 @@ class UserInfo extends Component {
                                 </li>
                                 <li className="col-md-6">
                                     <div className="img">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="50px"  alt=""></img>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="50px" alt=""></img>
                                     </div>
                                     <div className="details">
                                         <div className="name">

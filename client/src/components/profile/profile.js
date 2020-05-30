@@ -3,8 +3,7 @@ import UserProfile from './components/userProfile/userProfile';
 import UserInfo from './components/userInfo/userInfo';
 import './profile.css'
 class Profile extends Component {
-    state = {
-    }
+
 
     render() {
         return (
@@ -15,7 +14,7 @@ class Profile extends Component {
                             <UserProfile></UserProfile>
                         </div>
                         <div className="col-lg-9 col-md-8 col-sm-8">
-                            <UserInfo></UserInfo>
+                            <UserInfo user={this.props.user}></UserInfo>
                         </div>
                     </div>
                 </div>

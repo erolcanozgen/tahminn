@@ -22,7 +22,7 @@ module.exports = () => {
                 }).then((account) => {
                     if (account) {
                         _isFirstLogin = false;
-                        _name = account.user.name;
+                        _name = account.user.username;
                     }
                     else {
                         _name = user.displayName;
@@ -40,7 +40,7 @@ module.exports = () => {
                 }).then((account) => {
                     if (account) {
                         _isFirstLogin = false;
-                        _name = account.user.name;
+                        _name = account.user.username;
                     }
                     else {
                         _name = user.username;

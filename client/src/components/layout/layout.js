@@ -13,7 +13,7 @@ class Layout extends Component {
                 <NavigationBar user={this.props.user} ></NavigationBar>
                 <div className="container">
                     <Switch>
-                        <Route path="/profile" component={Profile} />
+                        <Route path="/profile" component={() => <Profile user={this.props.user} />} />
                         <Route path="/" component={Dashboard} />
                     </Switch>
                 </div>
