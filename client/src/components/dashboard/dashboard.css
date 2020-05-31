@@ -9,27 +9,6 @@
     }
 }
 
-body {
-    background-color: #eeeeee;
-    font-family: sans-serif;
-}
-
-h6 {
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
-}
-
-h6::after {
-    content: ' ';
-    display: block;
-    margin-top: 0.3em;
-    border-bottom: 2px solid white;
-}
-
-#activity-pane {
-    border-left: 1px solid #f8f8f8;
-}
-
 .prediction-tile {
     height: 75px;
     border-radius: 5px;
@@ -37,41 +16,4 @@ h6::after {
 
 .square-tile {
     padding-bottom: 100% !important;
-}
-
-.carousel-item.active,
-.carousel-item-next,
-.carousel-item-prev {
-    display: flex;
-}
-
-.carousel-item {
-    transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-}
-
-ol.carousel-indicators {
-    position: absolute;
-    top: 0;
-    margin: 0;
-    margin-top: 75px;
-    left: 0;
-    right: 0;
-    width: auto;
-}
-
-.carousel-indicators li {
-    width: 30%;
-    text-indent: 0;
-    text-align: center;
-    height: 25px;
-    background-color: #eeeeee;
-    margin: 0;
-    padding: 3px;
-    border: 2px solid #aaaaaa;
-    margin-left: -2px;
-    border-collapse: collapse;
-}
-.carousel-indicators .active {
-    background-color: #004899;
-    color: white;
 }

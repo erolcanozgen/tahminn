@@ -1,0 +1,116 @@
+#user-profile .profile-header {
+	position: relative;
+}
+#user-profile .profile-header > h3 {
+	margin-top: 10px
+}
+#user-profile .profile-header .edit-profile {
+	margin-top: -6px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#user-profile .profile-tabs {
+	margin-top: 30px;
+}
+
+#user-profile .profile-user-info {
+	padding-bottom: 20px;
+}
+#user-profile .profile-user-info .profile-user-details {
+	position: relative;
+	padding: 4px 0;
+}
+#user-profile .profile-user-info .profile-user-details .profile-user-details-label {
+	width: 110px;
+	float: left;
+	bottom: 0;
+	font-weight: bold;
+	left: 0;
+	position: absolute;
+	text-align: left;
+	top: 0;
+	width: 110px;
+	padding-top: 4px;
+}
+#user-profile .profile-user-info .profile-user-details .profile-user-details-value {
+	margin-left: 100px;
+}
+
+@media only screen and (max-width: 767px) {
+	#user-profile .profile-user-info .profile-user-details .profile-user-details-label {
+		float: none;
+		position: relative;
+		text-align: left;
+	}
+	#user-profile .profile-user-info .profile-user-details .profile-user-details-value {
+		margin-left: 0;
+	}
+}
+@media only screen and (max-width: 420px) {
+	#user-profile .profile-header .edit-profile {
+		display: block;
+		position: relative;
+		margin-bottom: 15px;
+	}
+	#user-profile .profile-message-btn .btn {
+		display: block;
+	}
+}
+
+.tabs-wrapper .tab-content {
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.widget-users {
+    list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.widget-users li {
+	border-bottom: 1px solid #ebebeb;
+	padding: 15px 0;
+	height: 96px;
+}
+.widget-users li > .img {
+	float: left;
+	margin-top: 8px;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+.widget-users li > .details {
+	margin-left: 60px;
+}
+.widget-users li > .details > .name {
+	font-weight: 600;
+}
+.widget-users li > .details > .name > a {
+	color: #344644;
+}
+.widget-users li > .details > .name > a:hover {
+	color: #2bb6a3;
+}
+.widget-users li > .details > .time {
+	color: #2bb6a3;
+	font-size: 0.75em;
+	padding-bottom: 7px;
+}
+.widget-users li > .details > .time.online {
+	color: #8dc859;
+}
+
+.league-table{
+    margin-top: 10px;
+}
+
+.league-table  tbody  tr  td {
+padding-right: 50px;
+}
+
+.current-user{
+    font-style:italic;
+    font-weight: bold;
+}
