@@ -14,3 +14,11 @@ h6::after {
     margin-top: 0.3em;
     border-bottom: 2px solid white;
 }
+
+.profile-img {
+	border: 1px solid #e1e1e1;
+	padding: 4px;
+	margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+}

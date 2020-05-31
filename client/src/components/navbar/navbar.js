@@ -7,6 +7,7 @@ import axios from 'axios';
 import { API_URL } from '../login/components/loginPanel/config'
 import site_icon from '../../assets/icons/navbar-brand.png'
 import $ from 'jquery'
+import { withTranslation } from 'react-i18next';
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -41,6 +42,7 @@ class NavigationBar extends Component {
     }
 
     render() {
+        const { t } = this.props;
         let logoutButtonDisplay = this.state.user.isAuthenticated ? "flex" : "none";
         let loginButtonDisplay = !this.state.user.isAuthenticated ? "flex" : "none";
         return (
@@ -54,37 +56,37 @@ class NavigationBar extends Component {
                             <li className="nav-item text-center">
                                 <a href="/prediction" className="nav-link external" data-target="/prediction">
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faQuestion} />
-                                    <span className="d-block px-1">Prediction</span>
+                                    <span className="d-block px-1">{t('Navbar.prediction')}</span>
                                 </a>
                             </li>
                             <li className="nav-item text-center">
                                 <a href="/activity" className="nav-link" data-target="/activity">
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faShareAlt} />
-                                    <span className="d-block px-1">Activity</span>
+                                    <span className="d-block px-1">{t('Navbar.social')}</span>
                                 </a>
                             </li>
                             <li className="nav-item text-center">
                                 <a href="/leaderboards" className="nav-link" data-target="/leaderboards">
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faTrophy} />
-                                    <span className="d-block px-1">Leaderboards</span>
+                                    <span className="d-block px-1">{t('Navbar.leaderboards')}</span>
                                 </a>
                             </li>
                             <li className="nav-item text-center d-block d-sm-none">
                                 <a href="#" className="nav-link" data-toggle="modal" data-target="#">
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faSearch} />
-                                    <span className="d-block px-1">Search</span>
+                                    <span className="d-block px-1">{t('Navbar.search')}</span>
                                 </a>
                             </li>
                             <li className="nav-item text-center d-block d-sm-none">
                                 <a href="/profile/userid" className="nav-link" data-target="/profile/userid">
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faUser} />
-                                    <span className="d-block px-1">Profile</span>
+                                    <span className="d-block px-1">{t('Navbar.profile')}</span>
                                 </a>
                             </li>
                         </ul>
                         <form className="ml-auto mr-3 my-auto d-none d-sm-inline">
                             <div className="input-group">
-                                <input type="text" className="form-control border-right-0" placeholder="Search" />
+                                <input type="text" className="form-control border-right-0" placeholder={t('Navbar.search')} />
                                 <div className="input-group-append">
                                     <button className="btn btn-navbar-search border-left-0" type="button">
                                         <FontAwesomeIcon className="d-inline-block" icon={faSearch} />
@@ -99,7 +101,7 @@ class NavigationBar extends Component {
                                 </a>
                             </li>
                             <li className="nav-item text-center">
-                                <button type="submit" style={{ display: loginButtonDisplay }} onClick={() => { this.navigate("login") }} className="btn btn-block nav-link align-items-center"><FontAwesomeIcon className="d-inline-block mr-2" icon={faSignInAlt} /> Login</button>
+                                <button type="submit" style={{ display: loginButtonDisplay }} onClick={() => { this.navigate("login") }} className="btn btn-block nav-link align-items-center"><FontAwesomeIcon className="d-inline-block mr-2" icon={faSignInAlt} />{t('Navbar.login')}</button>
                                 <button type="submit" style={{ display: logoutButtonDisplay }} onClick={() => { this.logout() }} className="btn btn-block nav-link"><FontAwesomeIcon className="d-inline-block" icon={faSignOutAlt} /></button>
                             </li>
                         </ul>
@@ -110,4 +112,6 @@ class NavigationBar extends Component {
     }
 }
 
-export default NavigationBar
+const TranslatedNavigationBar = withTranslation()(NavigationBar)
+
+export default TranslatedNavigationBar;
