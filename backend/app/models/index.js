@@ -19,5 +19,19 @@ db.user.belongsToMany(db.interest, { as: 'interests', through: 'userInterests' }
 db.interest.belongsToMany(db.user, { as: 'interested_users', through: 'userInterests' })
 //#endregion
 
+db.localized_resource = require("./localized_resource")(connection, Sequelize)
+
+db.prediction_type = require("./prediction_type")(connection, Sequelize)
+db.prediction_type_localized_name = db.prediction_type.belongsTo(db.localized_resource, { foreignKey: 'name_resource_id' })
+
+db.prediction = require("./prediction")(connection, Sequelize)
+db.prediction_localized_name = db.prediction.belongsTo(db.localized_resource, { foreignKey: 'name_resource_id' })
+
+db.prediction_interest = db.prediction.belongsTo(db.interest)
+
+db.prediction_options = require("./prediction_option")(connection, Sequelize)
+db.prediction_option_relation = db.prediction_options.belongsTo(db.prediction)
+
+
 
 module.exports = db;
