@@ -56,6 +56,7 @@ routes.loginRoutes(app);
 // Be careful !! while using db.connection.sync({force: true}) because it will remove all contents from the all tables
 db.connection.sync({ force: false })
 
+// require('./app/models/init_db/init_predictions')()
 
 server.listen(process.env.PORT || 8080, () => {
     console.log('listening...')
