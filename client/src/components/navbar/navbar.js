@@ -49,24 +49,24 @@ class NavigationBar extends Component {
             <div>
                 <nav className="navbar navbar-expand navbar-light bg-navbar top-colored p-0 font-weight-bold separated">
                     <div className="navbar-collapse collapse container" id="main-navbar">
-                        <a className="navbar-brand d-none d-md-inline-block" href="/">
+                        <a className="navbar-brand d-none d-md-inline-block" onClick={() => { this.navigate("") }}>
                             <img id="navbar-site-logo" className="center-block" width="167" height="32" src={site_icon} alt="navbar-site-logo" />
                         </a>
                         <ul className="navbar-nav w-100 w-sm-50">
                             <li className="nav-item text-center">
-                                <a href="/prediction" className="nav-link external" data-target="/prediction">
+                                <a className="nav-link" onClick={() => { this.navigate("prediction") }}>
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faQuestion} />
                                     <span className="d-block px-1">{t('Navbar.prediction')}</span>
                                 </a>
                             </li>
                             <li className="nav-item text-center">
-                                <a href="/activity" className="nav-link" data-target="/activity">
+                                <a className="nav-link" onClick={() => { this.navigate("activity") }}>
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faShareAlt} />
                                     <span className="d-block px-1">{t('Navbar.social')}</span>
                                 </a>
                             </li>
                             <li className="nav-item text-center">
-                                <a href="/leaderboards" className="nav-link" data-target="/leaderboards">
+                                <a className="nav-link" onClick={() => { this.navigate("leaderboards") }}>
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faTrophy} />
                                     <span className="d-block px-1">{t('Navbar.leaderboards')}</span>
                                 </a>
@@ -78,7 +78,7 @@ class NavigationBar extends Component {
                                 </a>
                             </li>
                             <li className="nav-item text-center d-block d-sm-none">
-                                <a href="/profile/userid" className="nav-link" data-target="/profile/userid">
+                                <a className="nav-link" onClick={() => { this.navigate("profile") }}>
                                     <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faUser} />
                                     <span className="d-block px-1">{t('Navbar.profile')}</span>
                                 </a>

@@ -22,3 +22,8 @@ h6::after {
     margin-bottom: 10px;
     border-radius: 50%;
 }
+
+#main-pane {
+    overflow-y: scroll;
+    height: calc(100vh - 54px);
+}

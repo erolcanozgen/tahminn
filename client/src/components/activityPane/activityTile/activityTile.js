@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './activityTile.css'
+import history from '../../../services/history'
 
 class ActivityTile extends Component {
 
@@ -9,7 +10,7 @@ class ActivityTile extends Component {
         return (
             <div className="col-12 p-1">
                 <div className="bg-light activity-tile tile-big">
-                    <a href="/profile">
+                    <a onClick={() => { history.push(`/profile`) }}>
                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" className="activity-user-img" />
                     </a>
                     <h5>{header}</h5>
