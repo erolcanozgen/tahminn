@@ -6,6 +6,7 @@ import ActivityPane from '../activityPane/activityPane'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './layout.css'
 import Prediction from '../prediction/prediction'
+import PredictionDetails from '../prediction/predictionDetails/predictionDetails'
 
 class Layout extends Component {
 
@@ -18,6 +19,7 @@ class Layout extends Component {
                         <div className="col-12 col-lg-9" id="main-pane">
                             <Switch>
                                 <Route path="/profile" component={() => <Profile user={this.props.user} />} />
+                                <Route path="/prediction/prediction-details" component={() => <PredictionDetails initialPos={this.props.location.state.initialPos} />} />
                                 <Route path="/prediction" component={Prediction} />
                                 <Route path="/" component={Dashboard} />
                             </Switch>
