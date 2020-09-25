@@ -13,18 +13,21 @@ class PredictionCard extends Component {
         return pos;
     }
 
-    openPredictionDetail = () => {
+    openPredictionDetail = (predictionID) => {
         $('#main-pane .overlay').addClass('overlay-faded');
         setTimeout(() => {
-            history.push({ pathname: "/prediction/prediction-details/predictionId", state: { initialPos: this.calculateRelativePos() } });
+            history.push({ pathname: "/prediction/prediction-details/" + predictionID, state: { initialPos: this.calculateRelativePos() } });
         }, 50);
     }
 
     render() {
+        const { title, predictionID, dueDate } = this.props;
         return (
-            <div className="col-12 prediction-card" onClick={this.openPredictionDetail}>
-                <div className="prediction-card-title" >Çaykur Rizespor - Fenerbahçe</div>
-                <div className="prediction-card-subhead" >Expires on 11.09.2020</div>
+            <div className="col-12 col-sm-6 p-1">
+                <div className="col-12 prediction-card" onClick={() => this.openPredictionDetail(predictionID)}>
+                    <div className="prediction-card-title" >{title}</div>
+                    <div className="prediction-card-subhead" >Expires on {dueDate}</div>
+                </div>
             </div>
         )
     }

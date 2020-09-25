@@ -6,65 +6,46 @@ import axios from 'axios'
 import $ from 'jquery'
 
 class Prediction extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            recommendedPredictions: [],
+            isLoading: true
+        }
+    }
 
-    getRecommendedPredictions(userId) {
+    componentDidMount() {
+        const { user } = this.props;
+        this.getRecommendedPredictions(user.id);
+    }
+
+    getRecommendedPredictions = (userId) => {
         axios.get(`${API_URL}/api/getRecommendedPredictions`, { params: { userId: userId } })
             .then(res => {
-                console.log(res);
+                this.setState({ isLoading: false, recommendedPredictions: res.data });
             });
     }
 
     render() {
 
         // TODO : IsAuthenticated check. If not show only hot topics
-        const { user } = this.props;
-        this.getRecommendedPredictions(user.id);
-        return (
-            <div>
+        const { isLoading, recommendedPredictions } = this.state;
+        if (isLoading) {
+            return (<div></div>)
+        }
+        else {
+            return (
+                <div>
                 <div className="overlay"></div>
                 <div className="row m-1 mt-1">
                     <div className="row">
                         <h6 className="col-12 pl-2 font-weight-bold">Recommended For You</h6><hr/>
-                        <div className="col-12 col-sm-6 p-1">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1">
-                            <PredictionCard />                
-                        </div>
-                        <div className="col-12 col-sm-6 p-1">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1 d-none d-sm-block">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1 d-none d-sm-block">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1 d-none d-sm-block">
-                            <PredictionCard />
-                        </div>
-                        <div className="col-12 col-sm-6 p-1 d-none d-sm-block">
-                            <PredictionCard />
-                        </div>
+                        {recommendedPredictions.map(prediction=> <PredictionCard key={prediction.id} predictionId={prediction.id} title={prediction.name} dueDate={prediction.dueDate} />)}
                     </div>
                 </div>
             </div>
-        )
+            )
+        }
     }
 }
 

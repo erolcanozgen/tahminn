@@ -4,7 +4,7 @@ const { addTwitterAccount } = require("./loginController");
 exports.getRecommendedPredictions = (req, res) => {
     const userId = req.query.userId;
     db.prediction.findAll({
-        include: {
+        include: [{
             model: db.interest,
             include: {
                 model: db.user,
@@ -13,9 +13,19 @@ exports.getRecommendedPredictions = (req, res) => {
                     id: userId
                 }
             }
-        }
+        },
+        {
+            model: db.prediction_translation,
+            as: 'name',
+            where: {
+                language_id: 1033
+            }
+        }]
     }).then((result) => {
-        console.log(result);
-        res.send(result.map(x => { id: x.id }));
+        res.send(result.map(x => ({
+            id: x.id,
+            name: x.name[0].text,
+            dueDate: x.dueDate
+        })));
     })
 }

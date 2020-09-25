@@ -6,7 +6,6 @@ class ActivityTile extends Component {
 
     render() {
         const { header, desc, user } = this.props;
-        console.log("tile render");
         return (
             <div className="col-12 p-1">
                 <div className="bg-light activity-tile tile-big">
