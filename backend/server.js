@@ -48,6 +48,7 @@ app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
 
 routes.loginRoutes(app);
+routes.predictionRoutes(app);
 
 
 //use this comment if any synchronization needed

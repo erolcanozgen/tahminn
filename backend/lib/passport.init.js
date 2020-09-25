@@ -27,7 +27,7 @@ module.exports = () => {
                     else {
                         _name = user.displayName;
                     }
-                    cb(null, { providerName: user.provider, id: user.id, name: _name, isFirstLogin: _isFirstLogin })
+                    cb(null, { providerName: user.provider, id: account.user.id, name: _name, isFirstLogin: _isFirstLogin })
                 });
                 break;
             case 'twitter':
