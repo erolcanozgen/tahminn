@@ -78,10 +78,18 @@ class NavigationBar extends Component {
                                 </a>
                             </li>
                             <li className="nav-item text-center d-block d-sm-none">
-                                <a className="nav-link" onClick={() => { this.navigate("profile") }}>
-                                    <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faUser} />
-                                    <span className="d-block px-1">{t('Navbar.profile')}</span>
-                                </a>
+                                {
+                                    !this.state.user.isAuthenticated ? 
+                                        <a className="nav-link" onClick={() => { this.navigate("login") }}>
+                                            <FontAwesomeIcon className="d-inline-block" icon={faSignInAlt} />
+                                            <span className="d-block px-1">{t('Navbar.login')}</span>
+                                        </a>
+                                        :
+                                        <a className="nav-link" onClick={() => { this.navigate("profile") }}>
+                                            <FontAwesomeIcon className="d-inline-block d-sm-none" icon={faUser} />
+                                            <span className="d-block px-1">{t('Navbar.profile')}</span>
+                                        </a>
+                                }
                             </li>
                         </ul>
                         <form className="ml-auto mr-3 my-auto d-none d-sm-inline">

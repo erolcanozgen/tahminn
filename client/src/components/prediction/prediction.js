@@ -10,13 +10,23 @@ class Prediction extends Component {
         super(props)
         this.state = {
             recommendedPredictions: [],
-            isLoading: true
+            isLoading: true,
+            user: {
+                IsAuthenticated: false,
+                isFirstLogin: false
+            }
         }
     }
 
     componentDidMount() {
         const { user } = this.props;
-        this.getRecommendedPredictions(user.id);
+        this.setState({ user });
+        if (user.isAuthenticated) {
+            this.getRecommendedPredictions(user.id);    
+        }
+        else {
+            // get latest predictions
+        }
     }
 
     getRecommendedPredictions = (userId) => {
@@ -29,23 +39,27 @@ class Prediction extends Component {
     render() {
 
         // TODO : IsAuthenticated check. If not show only hot topics
-        const { isLoading, recommendedPredictions } = this.state;
-        if (isLoading) {
-            return (<div></div>)
-        }
-        else {
-            return (
-                <div>
+        const { isLoading, recommendedPredictions, user } = this.state;
+        
+        return (
+            <div>
                 <div className="overlay"></div>
                 <div className="row m-1 mt-1">
-                    <div className="row">
-                        <h6 className="col-12 pl-2 font-weight-bold">Recommended For You</h6><hr/>
-                        {recommendedPredictions.map(prediction=> <PredictionCard key={prediction.id} predictionId={prediction.id} title={prediction.name} dueDate={prediction.dueDate} />)}
+                    <div className="col-12">
+                        <div className="row">
+                        {user.isAuthenticated ? <h6 className="col-12 pl-2 font-weight-bold">Recommended For You</h6>
+                            : <h6 className="col-12 pl-2 font-weight-bold">Latest Predictions</h6>
+                        }
+                        <hr />
+                        {isLoading ? [...Array(20)].map(x => <PredictionCard key={x} predictionId={''} title={''} dueDate={''} />)
+                            : recommendedPredictions.map(prediction=> <PredictionCard key={prediction.id} predictionId={prediction.id} title={prediction.name} dueDate={prediction.dueDate} />)
+                        }
+                        </div>
                     </div>
                 </div>
             </div>
-            )
-        }
+        )
+        
     }
 }
 

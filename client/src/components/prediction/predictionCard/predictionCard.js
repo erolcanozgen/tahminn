@@ -16,17 +16,17 @@ class PredictionCard extends Component {
     openPredictionDetail = (predictionID) => {
         $('#main-pane .overlay').addClass('overlay-faded');
         setTimeout(() => {
-            history.push({ pathname: "/prediction/prediction-details/" + predictionID, state: { initialPos: this.calculateRelativePos() } });
+            history.push({ pathname: "/prediction/" + predictionID, state: { initialPos: this.calculateRelativePos() } });
         }, 50);
     }
 
     render() {
-        const { title, predictionID, dueDate } = this.props;
+        const { title, predictionId, dueDate } = this.props;
         return (
             <div className="col-12 col-sm-6 p-1">
-                <div className="col-12 prediction-card" onClick={() => this.openPredictionDetail(predictionID)}>
-                    <div className="prediction-card-title" >{title}</div>
-                    <div className="prediction-card-subhead" >Expires on {dueDate}</div>
+                <div className="col-12 prediction-card" onClick={() => this.openPredictionDetail(predictionId)}>
+                    {title ? <div className="prediction-card-title" >{title}</div> : <div className="prediction-card-title-placeholder" ></div>}
+                    {dueDate ? <div className="prediction-card-subhead" >Expires on {dueDate}</div> : <div className="prediction-card-subhead-placeholder"></div>}
                 </div>
             </div>
         )

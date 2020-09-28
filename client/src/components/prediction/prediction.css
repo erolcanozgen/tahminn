@@ -50,6 +50,11 @@
     text-decoration: inherit;
     text-transform: inherit;
 }
+.prediction-card-title-placeholder {
+    background-color: #d0d0d0;
+    width: 80%;
+    height: 2rem;
+}
 
 .prediction-card-subhead {
     -moz-osx-font-smoothing: grayscale;
@@ -60,6 +65,13 @@
     text-decoration: inherit;
     text-transform: inherit;
     opacity: .6;
+}
+
+.prediction-card-subhead-placeholder {
+    margin-top: 4px;
+    background-color: #d0d0d0;
+    width: 70%;
+    height: 1.25rem;
 }
 
 .overlay {

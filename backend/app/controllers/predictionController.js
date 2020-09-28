@@ -29,3 +29,22 @@ exports.getRecommendedPredictions = (req, res) => {
         })));
     })
 }
+
+exports.getPredictionDetails = (req, res) => {
+    const predictionId = req.query.predictionId;
+    db.prediction.findAll({
+        where: {
+            id: predictionId
+        },
+        include: 
+        {
+            model: db.prediction_translation,
+            as: 'name',
+            where: {
+                language_id: 1033
+            }
+        }
+    }).then((result) => {
+        res.send(result[0]);
+    })
+}
