@@ -55,6 +55,9 @@ class PredictionDetails extends Component {
                 <div>Result date: {predictionDetails.resultDate}</div>
                 <div>Score: {predictionDetails.score}</div>
                 <div>Result: {predictionDetails.result}</div>
+                {predictionDetails.prediction_options.map(option => 
+                    <div>Option: {option.name}</div>    
+                )}
             </div>
         )
     }

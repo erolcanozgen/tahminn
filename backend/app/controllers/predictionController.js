@@ -33,17 +33,23 @@ exports.getRecommendedPredictions = (req, res) => {
 exports.getPredictionDetails = (req, res) => {
     const predictionId = req.query.predictionId;
     db.prediction.findAll({
+        attributes: ['dueDate', 'interestId', 'predictionTypeId', 'result', 'resultDate', 'score', 'name.text'],
         where: {
             id: predictionId
         },
-        include: 
-        {
-            model: db.prediction_translation,
-            as: 'name',
-            where: {
-                language_id: 1033
+        include: [ 
+            {
+                attributes: ['text'],
+                model: db.prediction_translation,
+                as: 'name',
+                where: {
+                    language_id: 1033
+                }
+            },
+            {
+                model: db.prediction_options
             }
-        }
+        ]
     }).then((result) => {
         res.send(result[0]);
     })

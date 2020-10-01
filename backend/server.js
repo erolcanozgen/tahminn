@@ -58,6 +58,7 @@ routes.predictionRoutes(app);
 db.connection.sync({ force: false })
 
 // require('./app/models/init_db/init_predictions')()
+// require('./app/models/init_db/init_prediction_options')()
 
 server.listen(process.env.PORT || 8080, () => {
     console.log('listening...')

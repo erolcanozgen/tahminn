@@ -35,7 +35,7 @@ db.prediction_type_association = db.prediction.belongsTo(db.prediction_type)
 
 
 db.prediction_options = require("./prediction_option")(connection, Sequelize)
-db.prediction_option_relation = db.prediction_options.belongsTo(db.prediction)
+db.prediction_option_relation = db.prediction.hasMany(db.prediction_options)
 
 
 
