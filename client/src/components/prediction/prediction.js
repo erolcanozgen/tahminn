@@ -63,8 +63,4 @@ class Prediction extends Component {
     }
 }
 
-$('.prediction-card').on('click', function () {
-    console.log("denem");
-})
-
 export default Prediction

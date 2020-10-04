@@ -4,7 +4,6 @@
     border-color: #d0d0d0;
     border-width: 1px;
     background-color: #fff;
-    overflow-y: scroll;
 }
 
 .expandedToMainPane{
@@ -16,10 +15,14 @@
     background-color: #014999;
     color: #fff;
     height: 75px;
-    padding-left: 40px;
+    padding-left: 20px;
     padding-top: 20px;
     font-size: 1.4rem;
-    animation: title-fade-in 140ms linear 60ms forwards;
+    animation: fade-in 140ms linear 60ms forwards;
+}
+
+.prediction-detail-content {
+    animation: fade-in 140ms linear 60ms forwards;
 }
 
 .prediction-due-info{
@@ -38,7 +41,7 @@
     }
 }
 
-@keyframes title-fade-in{
+@keyframes fade-in{
     from{
         opacity: 0;
     }
@@ -51,7 +54,7 @@
 .option-check {
     cursor: pointer;
     height: 50px;
-    width: 50px;
+    width: 69px;
     background-image:url( '../../../assets/icons/check_animation.png');
     background-position: left;
     background-repeat:no-repeat;

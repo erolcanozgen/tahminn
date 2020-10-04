@@ -5,7 +5,11 @@ import axios from 'axios'
 import { API_URL } from '../../login/components/loginPanel/config'
 import jQuery from 'jquery'
 import $ from 'jquery'
+import history from '../../../services/history'
 import { withTranslation } from 'react-i18next';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import i18next from 'i18next';
 
 class PredictionDetails extends Component {
 
@@ -44,18 +48,22 @@ class PredictionDetails extends Component {
 
         const { initialPos, t } = this.props;
         const { predictionDetails } = this.state;
-        var styles = {
+        var styles = initialPos ? {
             position: 'absolute',
             left: initialPos.x,
             top: initialPos.y,
             width: initialPos.width,
             height: initialPos.height
-        }
+        } : null;
+
         return (
             jQuery.isEmptyObject(predictionDetails) ? <div></div>
                 :
             <div className="prediction-detail expandedToMainPane" style={styles}>
                 <div className="col-12 prediction-detail-title">
+                    <a className="pr-3" data-toggle="modal" onClick={history.goBack}>
+                        <FontAwesomeIcon className="d-inline-block" icon={faArrowLeft} />
+                    </a>
                     {predictionDetails.name[0].text}
                 </div>
                 <div className="col-12 prediction-due-info">
@@ -70,20 +78,21 @@ class PredictionDetails extends Component {
                         <div className="col-12 col-sm-6 pt-2">
                             {t('Prediction.reward', { points: predictionDetails.score})}
                         </div>
+                        
+                        <div className="col-12 p-3">
+                            <table className="table table-bordered">
+                                <tbody>
+                                {predictionDetails.prediction_options.map(option => 
+                                    <tr>
+                                        <td>{option.name}</td>
+                                        <td>25%</td>
+                                        <td className="p-0"><div className="option-check" onClick={this.optionCheck}></div></td>
+                                    </tr>    
+                                )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div className="col-12 p-3">
-                <table class="table">
-                    <tbody>
-                    {predictionDetails.prediction_options.map(option => 
-                        <tr>
-                            <td>{option.name}</td>
-                            <td>25%</td>
-                            <td className="p-0"><div class="option-check" onClick={this.optionCheck}></div></td>
-                        </tr>    
-                    )}
-                    </tbody>
-                </table>
                 </div>
                 
             </div>

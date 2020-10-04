@@ -14,10 +14,7 @@ class PredictionCard extends Component {
     }
 
     openPredictionDetail = (predictionID) => {
-        $('#main-pane .overlay').addClass('overlay-faded');
-        setTimeout(() => {
-            history.push({ pathname: "/prediction/" + predictionID, state: { initialPos: this.calculateRelativePos() } });
-        }, 50);
+        history.push({ pathname: "/prediction/" + predictionID, state: { initialPos: this.calculateRelativePos() } });
     }
 
     render() {
