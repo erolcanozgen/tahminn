@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { API_URL } from '../../login/components/loginPanel/config'
 import jQuery from 'jquery'
+import $ from 'jquery'
+import { withTranslation } from 'react-i18next';
 
 class PredictionDetails extends Component {
 
@@ -32,10 +34,15 @@ class PredictionDetails extends Component {
                 this.setState({ isLoading: false, predictionDetails: res.data });
             });
     }
+    
+    optionCheck = (e) => {
+        $('.option-check').removeClass('option-checked')
+        $(e.target).toggleClass('option-checked');
+    }
 
     render() {
 
-        const { initialPos } = this.props;
+        const { initialPos, t } = this.props;
         const { predictionDetails } = this.state;
         var styles = {
             position: 'absolute',
@@ -51,16 +58,39 @@ class PredictionDetails extends Component {
                 <div className="col-12 prediction-detail-title">
                     {predictionDetails.name[0].text}
                 </div>
-                <div>Due date: {predictionDetails.dueDate}</div>
-                <div>Result date: {predictionDetails.resultDate}</div>
-                <div>Score: {predictionDetails.score}</div>
-                <div>Result: {predictionDetails.result}</div>
-                {predictionDetails.prediction_options.map(option => 
-                    <div>Option: {option.name}</div>    
-                )}
+                <div className="col-12 prediction-due-info">
+                    {t('Prediction.dueDateText')} : {predictionDetails.dueDate}
+                </div>
+                <br/>
+                <div className="col-12 prediction-detail-content pl-4">
+                    <div className="row">
+                        <div className="col-12 col-sm-6 pt-2">
+                            {t('Prediction.resultDateText')}<br/>{predictionDetails.resultDate}
+                        </div>
+                        <div className="col-12 col-sm-6 pt-2">
+                            {t('Prediction.reward', { points: predictionDetails.score})}
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12 p-3">
+                <table class="table">
+                    <tbody>
+                    {predictionDetails.prediction_options.map(option => 
+                        <tr>
+                            <td>{option.name}</td>
+                            <td>25%</td>
+                            <td className="p-0"><div class="option-check" onClick={this.optionCheck}></div></td>
+                        </tr>    
+                    )}
+                    </tbody>
+                </table>
+                </div>
+                
             </div>
         )
     }
 }
 
-export default withRouter(PredictionDetails)
+const TranslatedPredictionDetails = withTranslation()(PredictionDetails)
+
+export default withRouter(TranslatedPredictionDetails)

@@ -4,21 +4,28 @@
     border-color: #d0d0d0;
     border-width: 1px;
     background-color: #fff;
+    overflow-y: scroll;
 }
 
 .expandedToMainPane{
-    animation: expandToParent 200ms ease-out forwards;
+    animation: expandToParent 200ms cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
 }
 
 .prediction-detail-title {
     opacity: 0;
-    background-color: slateblue;
+    background-color: #014999;
     color: #fff;
     height: 75px;
     padding-left: 40px;
     padding-top: 20px;
     font-size: 1.4rem;
     animation: title-fade-in 140ms linear 60ms forwards;
+}
+
+.prediction-due-info{
+    text-align: center;
+    background-color: #6FA8E8;
+    font-weight: bold;
 }
 
 @keyframes expandToParent{
@@ -39,3 +46,24 @@
         opacity: 1;
     }
 }
+
+
+.option-check {
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    background-image:url( '../../../assets/icons/check_animation.png');
+    background-position: left;
+    background-repeat:no-repeat;
+    background-size:2900%;
+  }
+  
+  
+  .option-checked {
+    animation: option-check-burst .8s steps(28) 1 forwards;
+  }
+  
+  @keyframes option-check-burst {
+    from {background-position:left;}
+    to { background-position:right;}
+  }

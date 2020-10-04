@@ -1,0 +1,7 @@
+{
+    "tr": {
+        "dueDateText": "Son Tarih",
+        "resultDateText": "Sonuç Tarihi",
+        "reward": "Ödül: {{points}} puan"
+    }
+}

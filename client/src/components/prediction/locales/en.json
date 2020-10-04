@@ -1,0 +1,7 @@
+{
+    "en": {
+        "dueDateText": "Deadline",
+        "resultDateText": "Result Date",
+        "reward": "Reward: {{points}} points"
+    }
+}
