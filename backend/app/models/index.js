@@ -37,6 +37,11 @@ db.prediction_type_association = db.prediction.belongsTo(db.prediction_type)
 db.prediction_options = require("./prediction_option")(connection, Sequelize)
 db.prediction_option_relation = db.prediction.hasMany(db.prediction_options)
 
+db.prediction_history = require("./prediction_history")(connection, Sequelize)
+db.prediction_history.belongsTo(db.user, { foreignKey: { name: 'userId', unique: 'pkset' } })
+db.prediction_history.belongsTo(db.prediction, { foreignKey: { name: 'predictionId', unique: 'pkset' } })
+db.prediction_history.belongsTo(db.prediction_options, { foreignKey: 'optionId' })
+db.prediction.hasMany(db.prediction_history, {as: 'selectedOption'})
 
 
 module.exports = db;

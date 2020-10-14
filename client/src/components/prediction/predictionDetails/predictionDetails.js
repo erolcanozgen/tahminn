@@ -9,7 +9,6 @@ import history from '../../../services/history'
 import { withTranslation } from 'react-i18next';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import i18next from 'i18next';
 
 class PredictionDetails extends Component {
 
@@ -33,10 +32,25 @@ class PredictionDetails extends Component {
     }
 
     getPredictionDetails = (predictionId) => {
-        axios.get(`${API_URL}/api/getPredictionDetails`, { params: { predictionId: predictionId } })
+        axios.get(`${API_URL}/api/getPredictionDetails`, { params: { predictionId: predictionId }, withCredentials: true })
             .then(res => {
                 this.setState({ isLoading: false, predictionDetails: res.data });
             });
+    }
+
+    savePrediction = () => {
+        const {predictionDetails} = this.state;
+        var selectedOptionRow = $('tr').has(".option-checked");
+        axios.get(`${API_URL}/api/savePrediction`, { 
+            params: {
+                optionId: selectedOptionRow.attr("optionId"),
+                predictionId: predictionDetails.id
+            },
+            withCredentials: true
+        }).then(res => {
+            console.log("saved");
+            this.setState({ isLoading: false });
+        });
     }
     
     optionCheck = (e) => {
@@ -83,14 +97,15 @@ class PredictionDetails extends Component {
                             <table className="table table-bordered">
                                 <tbody>
                                 {predictionDetails.prediction_options.map(option => 
-                                    <tr>
+                                    <tr key={option.id} optionId={option.id}>
                                         <td>{option.name}</td>
                                         <td>25%</td>
-                                        <td className="p-0"><div className="option-check" onClick={this.optionCheck}></div></td>
+                                        <td className="p-0"><div className={predictionDetails.selectedOption && predictionDetails.selectedOption.length != 0 && predictionDetails.selectedOption[0].optionId == option.id ? "option-check option-checked" : "option-check"} onClick={this.optionCheck}></div></td>
                                     </tr>    
                                 )}
                                 </tbody>
                             </table>
+                            <button onClick={this.savePrediction}>Tahmini tamamla</button>
                         </div>
                     </div>
                 </div>
