@@ -39,23 +39,73 @@ class PredictionDetails extends Component {
     }
 
     savePrediction = () => {
+        if($('.btn-save').hasClass('disabled')){
+            return;
+        }
         const {predictionDetails} = this.state;
-        var selectedOptionRow = $('tr').has(".option-checked");
+        var selectedOptionId = $('.option-checked').attr("optionid");
         axios.get(`${API_URL}/api/savePrediction`, { 
             params: {
-                optionId: selectedOptionRow.attr("optionId"),
+                optionId: selectedOptionId,
                 predictionId: predictionDetails.id
             },
             withCredentials: true
         }).then(res => {
-            console.log("saved");
-            this.setState({ isLoading: false });
+            if(res.data.status == 'unauthorized'){
+                history.push('/login');
+            }
+            $('.btn-save').addClass('btn-save-saved');
+            $('.btn-save').addClass('disabled');
         });
     }
     
     optionCheck = (e) => {
-        $('.option-check').removeClass('option-checked')
+        $('.option-check').removeClass('option-checked');
+        $('.btn-save').removeClass('disabled');
         $(e.target).toggleClass('option-checked');
+    }
+
+    renderByPredictionType(predictionDetails){
+        switch(predictionDetails.predictionTypeId) {
+            case 1:
+                return(
+                    <div className="row w-100">
+                        <div className="col-6 border-right text-center">
+                            {predictionDetails.prediction_options[0].name}
+                            <div optionid={predictionDetails.prediction_options[0].id} className={predictionDetails.selectedOption && predictionDetails.selectedOption.length != 0 && predictionDetails.selectedOption[0].optionId == predictionDetails.prediction_options[0].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
+                            50%
+                        </div>
+                        <div className="col-6 border-left text-center">
+                            {predictionDetails.prediction_options[1].name}
+                            <div optionid={predictionDetails.prediction_options[1].id} className={predictionDetails.selectedOption && predictionDetails.selectedOption.length != 0 && predictionDetails.selectedOption[0].optionId == predictionDetails.prediction_options[1].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
+                            50%
+                        </div>
+                        <button onClick={this.savePrediction} className="btn btn-save disabled mr-auto ml-auto">Tahmini tamamla</button>
+                    </div>
+                );
+            case 2:
+                return(
+                    <div className="col-12 p-3">
+                        <table className="table">
+                            <thead>
+                                <td className="p-1 align-middle"></td>
+                                <td className="p-1 align-middle">Option</td>
+                                <td className="p-1 align-middle text-right">Prediction Rate</td>
+                            </thead>
+                            <tbody>
+                            {predictionDetails.prediction_options.map(option => 
+                                <tr key={option.id} optionid={option.id}>
+                                    <td className="p-0 align-middle"><div optionid={option.id} className={predictionDetails.selectedOption && predictionDetails.selectedOption.length != 0 && predictionDetails.selectedOption[0].optionId == option.id ? "option-check option-checked" : "option-check"} onClick={this.optionCheck}></div></td>
+                                    <td className="p-1 align-middle">{option.name}</td>
+                                    <td className="p-1 align-middle text-right">25%</td>
+                                </tr>    
+                            )}
+                            </tbody>
+                        </table>
+                        <button onClick={this.savePrediction} className="btn btn-save disabled">Tahmini tamamla</button>
+                    </div>
+                );
+        }
     }
 
     render() {
@@ -92,21 +142,7 @@ class PredictionDetails extends Component {
                         <div className="col-12 col-sm-6 pt-2">
                             {t('Prediction.reward', { points: predictionDetails.score})}
                         </div>
-                        
-                        <div className="col-12 p-3">
-                            <table className="table table-bordered">
-                                <tbody>
-                                {predictionDetails.prediction_options.map(option => 
-                                    <tr key={option.id} optionId={option.id}>
-                                        <td>{option.name}</td>
-                                        <td>25%</td>
-                                        <td className="p-0"><div className={predictionDetails.selectedOption && predictionDetails.selectedOption.length != 0 && predictionDetails.selectedOption[0].optionId == option.id ? "option-check option-checked" : "option-check"} onClick={this.optionCheck}></div></td>
-                                    </tr>    
-                                )}
-                                </tbody>
-                            </table>
-                            <button onClick={this.savePrediction}>Tahmini tamamla</button>
-                        </div>
+                        {this.renderByPredictionType(predictionDetails)}
                     </div>
                 </div>
                 

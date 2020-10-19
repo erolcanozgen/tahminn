@@ -73,12 +73,14 @@ exports.savePrediction = (req, res) => {
     const {predictionId, optionId} = req.query;
     if (req.session.passport && req.session.passport.user) {
         let user = req.session.passport.user;
-        db.prediction_history.create({
+        db.prediction_history.upsert({
             userId: user.id,
             predictionId: predictionId,
             optionId: optionId
+        }).then(result => {
+            res.send({status: 'successful'});
         });
     }
     else
-        res.send({ IsAuthenticated: false })
+        res.send({ status: 'unauthorized' });
 }
