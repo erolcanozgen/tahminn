@@ -23,7 +23,7 @@ class PredictionCard extends Component {
             <div className="col-12 col-sm-6 p-1">
                 <div className="col-12 prediction-card" onClick={() => this.openPredictionDetail(predictionId)}>
                     {title ? <div className="prediction-card-title" >{title}</div> : <div className="prediction-card-title-placeholder" ></div>}
-                    {dueDate ? <div className="prediction-card-subhead" >Expires on {dueDate}</div> : <div className="prediction-card-subhead-placeholder"></div>}
+                    {dueDate ? <div className="prediction-card-subhead" >Expires on {dueDate.replace('T', ' ').replace('.000Z', '')}</div> : <div className="prediction-card-subhead-placeholder"></div>}
                 </div>
             </div>
         )

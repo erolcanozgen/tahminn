@@ -56,6 +56,7 @@ class PredictionDetails extends Component {
             }
             $('.btn-save').addClass('btn-save-saved');
             $('.btn-save').addClass('disabled');
+            this.getPredictionDetails(predictionDetails.id);
         });
     }
     
@@ -72,13 +73,13 @@ class PredictionDetails extends Component {
                     <div className="row w-100">
                         <div className="col-6 border-right text-center">
                             {predictionDetails.prediction_options[0].name}
-                            <div optionid={predictionDetails.prediction_options[0].id} className={predictionDetails.selectedOption && predictionDetails.selectedOption.length != 0 && predictionDetails.selectedOption[0].optionId == predictionDetails.prediction_options[0].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
-                            50%
+                            <div optionid={predictionDetails.prediction_options[0].id} className={predictionDetails.selectedOptions && predictionDetails.selectedOptions.length != 0 && predictionDetails.selectedOptions[0].optionId == predictionDetails.prediction_options[0].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
+                            {predictionDetails.prediction_options[0].rate}%
                         </div>
                         <div className="col-6 border-left text-center">
                             {predictionDetails.prediction_options[1].name}
-                            <div optionid={predictionDetails.prediction_options[1].id} className={predictionDetails.selectedOption && predictionDetails.selectedOption.length != 0 && predictionDetails.selectedOption[0].optionId == predictionDetails.prediction_options[1].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
-                            50%
+                            <div optionid={predictionDetails.prediction_options[1].id} className={predictionDetails.selectedOptions && predictionDetails.selectedOptions.length != 0 && predictionDetails.selectedOptions[0].optionId == predictionDetails.prediction_options[1].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
+                            {predictionDetails.prediction_options[1].rate}%
                         </div>
                         <button onClick={this.savePrediction} className="btn btn-save disabled mr-auto ml-auto">Tahmini tamamla</button>
                     </div>
@@ -95,9 +96,9 @@ class PredictionDetails extends Component {
                             <tbody>
                             {predictionDetails.prediction_options.map(option => 
                                 <tr key={option.id} optionid={option.id}>
-                                    <td className="p-0 align-middle"><div optionid={option.id} className={predictionDetails.selectedOption && predictionDetails.selectedOption.length != 0 && predictionDetails.selectedOption[0].optionId == option.id ? "option-check option-checked" : "option-check"} onClick={this.optionCheck}></div></td>
+                                    <td className="p-0 align-middle"><div optionid={option.id} className={predictionDetails.selectedOptions && predictionDetails.selectedOptions.length != 0 && predictionDetails.selectedOptions[0].optionId == option.id ? "option-check option-checked" : "option-check"} onClick={this.optionCheck}></div></td>
                                     <td className="p-1 align-middle">{option.name}</td>
-                                    <td className="p-1 align-middle text-right">25%</td>
+                                    <td className="p-1 align-middle text-right">{option.rate}%</td>
                                 </tr>    
                             )}
                             </tbody>
@@ -131,13 +132,13 @@ class PredictionDetails extends Component {
                     {predictionDetails.name[0].text}
                 </div>
                 <div className="col-12 prediction-due-info">
-                    {t('Prediction.dueDateText')} : {predictionDetails.dueDate}
+                    {t('Prediction.dueDateText')} : {predictionDetails.dueDate.replace('T', ' ').replace('.000Z', '')}
                 </div>
                 <br/>
                 <div className="col-12 prediction-detail-content pl-4">
                     <div className="row">
                         <div className="col-12 col-sm-6 pt-2">
-                            {t('Prediction.resultDateText')}<br/>{predictionDetails.resultDate}
+                            {t('Prediction.resultDateText')}<br/>{predictionDetails.resultDate.replace('T', ' ').replace('.000Z', '')}
                         </div>
                         <div className="col-12 col-sm-6 pt-2">
                             {t('Prediction.reward', { points: predictionDetails.score})}

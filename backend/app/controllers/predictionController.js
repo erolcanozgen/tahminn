@@ -1,5 +1,4 @@
 const db = require("../models");
-const { addTwitterAccount } = require("./loginController");
 
 exports.getRecommendedPredictions = (req, res) => {
     const userId = req.query.userId;
@@ -12,7 +11,8 @@ exports.getRecommendedPredictions = (req, res) => {
                 where: {
                     id: userId
                 }
-            }
+            },
+            required: true
         },
         {
             model: db.prediction_translation,
@@ -47,25 +47,40 @@ exports.getPredictionDetails = (req, res) => {
                 }
             },
             {
+                as: 'selectedOptions',
+                model: db.prediction_history,
+                required: false
+            },
+            {
                 model: db.prediction_options
             }
         ]
     }
-    if (req.session.passport && req.session.passport.user) {
-        let user = req.session.passport.user;
-        queryObj.include.push({
-            attributes: ['optionId'],
-            as: 'selectedOption',
-            model: db.prediction_history,
-            where: {
-                userId: user.id
-            },
-            required: false
-        })
-    }
     
     db.prediction.findAll(queryObj).then((result) => {
-        res.send(result[0]);
+        const predictionDetail = result[0];
+        const numberOfAllPredictions = predictionDetail.selectedOptions.length;
+        if(numberOfAllPredictions != 0){
+            predictionDetail.prediction_options.forEach(prediction_option => {
+                const numberOfSelected = predictionDetail.selectedOptions.filter(option => option.optionId === prediction_option.id).length;
+                prediction_option.set('rate', ((numberOfSelected /  numberOfAllPredictions) * 100).toFixed(2));
+            });
+        }
+        else{
+            predictionDetail.prediction_options.forEach(prediction_option => {
+                prediction_option.set('rate', "0");
+            });
+        }
+        
+        if (req.session.passport && req.session.passport.user) {
+            let user = req.session.passport.user;
+            predictionDetail.set('selectedOptions', predictionDetail.selectedOptions.filter(selection => selection.userId === user.id));
+        }
+        else {
+            predictionDetail.set('selectedOptions', []);
+        }
+
+        res.send(predictionDetail);
     })
 }
 

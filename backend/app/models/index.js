@@ -41,7 +41,7 @@ db.prediction_history = require("./prediction_history")(connection, Sequelize)
 db.prediction_history.belongsTo(db.user, { foreignKey: { name: 'userId', unique: 'pkset' } })
 db.prediction_history.belongsTo(db.prediction, { foreignKey: { name: 'predictionId', unique: 'pkset' } })
 db.prediction_history.belongsTo(db.prediction_options, { foreignKey: 'optionId' })
-db.prediction.hasMany(db.prediction_history, {as: 'selectedOption'})
+db.prediction.hasMany(db.prediction_history, {as: 'selectedOptions'})
 
 
 module.exports = db;
