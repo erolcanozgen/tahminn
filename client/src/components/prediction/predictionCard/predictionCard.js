@@ -5,16 +5,8 @@ import $ from 'jquery'
 
 class PredictionCard extends Component {
 
-    calculateRelativePos = () => {
-        let pos = ReactDOM.findDOMNode(this).getBoundingClientRect();
-        let parentPos = $('#main-pane')[0].getBoundingClientRect();
-        pos.x = pos.x - parentPos.x;
-        pos.y = pos.y - parentPos.y;
-        return pos;
-    }
-
     openPredictionDetail = (predictionID) => {
-        history.push({ pathname: "/prediction/" + predictionID, state: { initialPos: this.calculateRelativePos() } });
+        history.push({ pathname: "/prediction/" + predictionID });
     }
 
     render() {

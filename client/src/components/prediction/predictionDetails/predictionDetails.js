@@ -9,6 +9,7 @@ import history from '../../../services/history'
 import { withTranslation } from 'react-i18next';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import blob2ImageUrl from '../../../utils/blob2Image';
 
 class PredictionDetails extends Component {
 
@@ -66,17 +67,33 @@ class PredictionDetails extends Component {
         $(e.target).toggleClass('option-checked');
     }
 
+    getOptionImageSources(options){
+        var sourceList = [];
+        options.forEach(option => {
+            if(option.icon){
+                sourceList.push(blob2ImageUrl(option.icon.data));
+            }
+            else{
+                sourceList.push(null);
+            }
+        });
+        return sourceList;
+    }
+
     renderByPredictionType(predictionDetails){
+        var predictionImgSources = this.getOptionImageSources(predictionDetails.prediction_options);
         switch(predictionDetails.predictionTypeId) {
             case 1:
                 return(
                     <div className="row w-100">
                         <div className="col-6 border-right text-center">
-                            {predictionDetails.prediction_options[0].name}
+                            {predictionImgSources[0] ? <img className="prediction-img" src={predictionImgSources[0]}/> : ''}
+                            <div>{predictionDetails.prediction_options[0].name}</div>
                             <div optionid={predictionDetails.prediction_options[0].id} className={predictionDetails.selectedOptions && predictionDetails.selectedOptions.length != 0 && predictionDetails.selectedOptions[0].optionId == predictionDetails.prediction_options[0].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
                             {predictionDetails.prediction_options[0].rate}%
                         </div>
                         <div className="col-6 border-left text-center">
+                            {predictionImgSources[1] ? <img className="prediction-img" src={predictionImgSources[1]}/> : ''}
                             {predictionDetails.prediction_options[1].name}
                             <div optionid={predictionDetails.prediction_options[1].id} className={predictionDetails.selectedOptions && predictionDetails.selectedOptions.length != 0 && predictionDetails.selectedOptions[0].optionId == predictionDetails.prediction_options[1].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
                             {predictionDetails.prediction_options[1].rate}%
@@ -90,13 +107,15 @@ class PredictionDetails extends Component {
                         <table className="table">
                             <thead>
                                 <td className="p-1 align-middle"></td>
+                                <td className="p-1 align-middle"></td>
                                 <td className="p-1 align-middle">Option</td>
                                 <td className="p-1 align-middle text-right">Prediction Rate</td>
                             </thead>
                             <tbody>
-                            {predictionDetails.prediction_options.map(option => 
+                            {predictionDetails.prediction_options.map((option, index) => 
                                 <tr key={option.id} optionid={option.id}>
                                     <td className="p-0 align-middle"><div optionid={option.id} className={predictionDetails.selectedOptions && predictionDetails.selectedOptions.length != 0 && predictionDetails.selectedOptions[0].optionId == option.id ? "option-check option-checked" : "option-check"} onClick={this.optionCheck}></div></td>
+                                    <td className="p-1 align-middle">{predictionImgSources[index] ? <img className="prediction-img-small d-none d-sm-block" src={predictionImgSources[index]}/> : ''}</td>
                                     <td className="p-1 align-middle">{option.name}</td>
                                     <td className="p-1 align-middle text-right">{option.rate}%</td>
                                 </tr>    
@@ -111,20 +130,15 @@ class PredictionDetails extends Component {
 
     render() {
 
-        const { initialPos, t } = this.props;
+        const { t } = this.props;
         const { predictionDetails } = this.state;
-        var styles = initialPos ? {
-            position: 'absolute',
-            left: initialPos.x,
-            top: initialPos.y,
-            width: initialPos.width,
-            height: initialPos.height
-        } : null;
-
+        var blob = '';
+        var imgurl = '';
+        
         return (
             jQuery.isEmptyObject(predictionDetails) ? <div></div>
                 :
-            <div className="prediction-detail expandedToMainPane" style={styles}>
+            <div className="prediction-detail">
                 <div className="col-12 prediction-detail-title">
                     <a className="pr-3" data-toggle="modal" onClick={history.goBack}>
                         <FontAwesomeIcon className="d-inline-block" icon={faArrowLeft} />
@@ -135,7 +149,7 @@ class PredictionDetails extends Component {
                     {t('Prediction.dueDateText')} : {predictionDetails.dueDate.replace('T', ' ').replace('.000Z', '')}
                 </div>
                 <br/>
-                <div className="col-12 prediction-detail-content pl-4">
+                <div className="col-12 prediction-detail-content">
                     <div className="row">
                         <div className="col-12 col-sm-6 pt-2">
                             {t('Prediction.resultDateText')}<br/>{predictionDetails.resultDate.replace('T', ' ').replace('.000Z', '')}

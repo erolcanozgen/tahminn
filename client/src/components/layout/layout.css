@@ -24,6 +24,6 @@ h6::after {
 }
 
 #main-pane {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: calc(100vh - 54px);
 }

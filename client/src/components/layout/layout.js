@@ -19,7 +19,7 @@ class Layout extends Component {
                         <div className="col-12 col-lg-9 p-1" id="main-pane">
                             <Switch>
                                 <Route path="/profile" component={() => <Profile user={this.props.user} />} />
-                                <Route path="/prediction/:predictionId" component={() => <PredictionDetails initialPos={this.props.location.state ? this.props.location.state.initialPos : null} user={this.props.user} />} />
+                                <Route path="/prediction/:predictionId" component={() => <PredictionDetails user={this.props.user} />} />
                                 <Route path="/prediction" component={() => <Prediction user={this.props.user} />} />
                                 <Route path="/" component={Dashboard} />
                             </Switch>
