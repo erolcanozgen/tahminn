@@ -63,6 +63,7 @@ class PredictionDetails extends Component {
     
     optionCheck = (e) => {
         $('.option-check').removeClass('option-checked');
+        $('.btn-save').removeClass('btn-save-saved');
         $('.btn-save').removeClass('disabled');
         $(e.target).toggleClass('option-checked');
     }
@@ -80,7 +81,7 @@ class PredictionDetails extends Component {
         return sourceList;
     }
 
-    renderByPredictionType(predictionDetails){
+    renderByPredictionType(predictionDetails, translation){
         var predictionImgSources = this.getOptionImageSources(predictionDetails.prediction_options);
         switch(predictionDetails.predictionTypeId) {
             case 1:
@@ -90,15 +91,15 @@ class PredictionDetails extends Component {
                             {predictionImgSources[0] ? <img className="prediction-img" src={predictionImgSources[0]}/> : ''}
                             <div>{predictionDetails.prediction_options[0].name}</div>
                             <div optionid={predictionDetails.prediction_options[0].id} className={predictionDetails.selectedOptions && predictionDetails.selectedOptions.length != 0 && predictionDetails.selectedOptions[0].optionId == predictionDetails.prediction_options[0].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
-                            {predictionDetails.prediction_options[0].rate}%
+                            <div>{predictionDetails.prediction_options[0].rate}%</div>
                         </div>
                         <div className="col-6 border-left text-center">
                             {predictionImgSources[1] ? <img className="prediction-img" src={predictionImgSources[1]}/> : ''}
                             {predictionDetails.prediction_options[1].name}
                             <div optionid={predictionDetails.prediction_options[1].id} className={predictionDetails.selectedOptions && predictionDetails.selectedOptions.length != 0 && predictionDetails.selectedOptions[0].optionId == predictionDetails.prediction_options[1].id ? "option-check option-checked mx-auto" : "option-check mx-auto"} onClick={this.optionCheck}></div>
-                            {predictionDetails.prediction_options[1].rate}%
+                            <div>{predictionDetails.prediction_options[1].rate}%</div>
                         </div>
-                        <button onClick={this.savePrediction} className="btn btn-save disabled mr-auto ml-auto">Tahmini tamamla</button>
+                        <button onClick={this.savePrediction} className="btn btn-save disabled mr-auto ml-auto mb-3 mt-3">{translation('Prediction.savePredictionButton')}</button>
                     </div>
                 );
             case 2:
@@ -108,8 +109,8 @@ class PredictionDetails extends Component {
                             <thead>
                                 <td className="p-1 align-middle"></td>
                                 <td className="p-1 align-middle"></td>
-                                <td className="p-1 align-middle">Option</td>
-                                <td className="p-1 align-middle text-right">Prediction Rate</td>
+                                <td className="p-1 align-middle">{translation('Prediction.option')}</td>
+                                <td className="p-1 align-middle text-right">{translation('Prediction.predictionRate')}</td>
                             </thead>
                             <tbody>
                             {predictionDetails.prediction_options.map((option, index) => 
@@ -122,7 +123,7 @@ class PredictionDetails extends Component {
                             )}
                             </tbody>
                         </table>
-                        <button onClick={this.savePrediction} className="btn btn-save disabled">Tahmini tamamla</button>
+                        <button onClick={this.savePrediction} className="btn btn-save disabled">{translation('Prediction.savePredictionButton')}</button>
                     </div>
                 );
         }
@@ -132,8 +133,6 @@ class PredictionDetails extends Component {
 
         const { t } = this.props;
         const { predictionDetails } = this.state;
-        var blob = '';
-        var imgurl = '';
         
         return (
             jQuery.isEmptyObject(predictionDetails) ? <div></div>
@@ -151,13 +150,13 @@ class PredictionDetails extends Component {
                 <br/>
                 <div className="col-12 prediction-detail-content">
                     <div className="row">
-                        <div className="col-12 col-sm-6 pt-2">
+                        <div className="col-6 pt-2">
                             {t('Prediction.resultDateText')}<br/>{predictionDetails.resultDate.replace('T', ' ').replace('.000Z', '')}
                         </div>
-                        <div className="col-12 col-sm-6 pt-2">
+                        <div className="col-6 pt-2 text-right">
                             {t('Prediction.reward', { points: predictionDetails.score})}
                         </div>
-                        {this.renderByPredictionType(predictionDetails)}
+                        {this.renderByPredictionType(predictionDetails, t)}
                     </div>
                 </div>
                 

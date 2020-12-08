@@ -2,6 +2,9 @@
     "en": {
         "dueDateText": "Deadline",
         "resultDateText": "Result Date",
-        "reward": "Reward: {{points}} points"
+        "reward": "Reward: {{points}} points",
+        "savePredictionButton": "Save My Prediction",
+        "predictionRate": "Prediction Rate",
+        "option": "Option"
     }
 }

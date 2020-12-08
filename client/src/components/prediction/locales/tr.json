@@ -2,6 +2,9 @@
     "tr": {
         "dueDateText": "Son Tarih",
         "resultDateText": "Sonuç Tarihi",
-        "reward": "Ödül: {{points}} puan"
+        "reward": "Ödül: {{points}} puan",
+        "savePredictionButton": "Tahminimi Kaydet",
+        "predictionRate": "Tahmin Oranı",
+        "option": "Aday"
     }
 }
