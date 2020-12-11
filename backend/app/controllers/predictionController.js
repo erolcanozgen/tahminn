@@ -30,6 +30,28 @@ exports.getRecommendedPredictions = (req, res) => {
     })
 }
 
+exports.getLatestPredictions = (req, res) => {
+    db.prediction.findAll({
+        include: [
+        {
+            model: db.prediction_translation,
+            as: 'name',
+            where: {
+                language_id: 1033
+            }
+        }],
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    }).then((result) => {
+        res.send(result.map(x => ({
+            id: x.id,
+            name: x.name[0].text,
+            dueDate: x.dueDate
+        })));
+    })
+}
+
 exports.getPredictionDetails = (req, res) => {
     const predictionId = req.query.predictionId;
     const queryObj = {
