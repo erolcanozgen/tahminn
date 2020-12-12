@@ -5,7 +5,7 @@ import ActivityTile from './activityTile/activityTile'
 class ActivityPane extends Component {
 
     render() {
-        const CreateActivityTiles = (activities, user) => activities.map(activity => <ActivityTile user={user} header={activity.header} desc={activity.desc}></ActivityTile>);
+        const CreateActivityTiles = (activities, user) => activities.map(activity => <ActivityTile key={activity.header} user={user} header={activity.header} desc={activity.desc}></ActivityTile>);
         
         let activityList = [
             {

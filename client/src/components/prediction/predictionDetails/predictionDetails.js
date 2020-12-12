@@ -107,10 +107,12 @@ class PredictionDetails extends Component {
                     <div className="col-12 p-3">
                         <table className="table">
                             <thead>
-                                <td className="p-1 align-middle"></td>
-                                <td className="p-1 align-middle"></td>
-                                <td className="p-1 align-middle">{translation('Prediction.option')}</td>
-                                <td className="p-1 align-middle text-right">{translation('Prediction.predictionRate')}</td>
+                                <tr>
+                                    <th className="p-1 align-middle"></th>
+                                    <th className="p-1 align-middle"></th>
+                                    <th className="p-1 align-middle">{translation('Prediction.option')}</th>
+                                    <th className="p-1 align-middle text-right">{translation('Prediction.predictionRate')}</th>
+                                </tr>
                             </thead>
                             <tbody>
                             {predictionDetails.prediction_options.map((option, index) => 

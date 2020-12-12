@@ -65,7 +65,7 @@ class Prediction extends Component {
                             {user.isAuthenticated === true && isLoading === false ? <label className="recommended-prediction-warning">{t('Prediction.noRecommendedPredictionMessage')}</label> : ''}
                             <h6 className="col-12 pl-2 font-weight-bold">{t('Prediction.latestPredictions')}</h6>
                             <hr />
-                            {isLoading ? [...Array(20)].map(x => <PredictionCard key={x} predictionId={''} title={''} dueDate={''} />)
+                            {isLoading ? [...Array(20)].map((x,index) => <PredictionCard key={index} predictionId={''} title={''} dueDate={''} />)
                             : latestPredictions.map(prediction=> <PredictionCard key={prediction.id} predictionId={prediction.id} title={prediction.name} dueDate={prediction.dueDate} />)
                             }
                         </div>
@@ -74,7 +74,7 @@ class Prediction extends Component {
                         <div className="row">
                             <h6 className="col-12 pl-2 font-weight-bold">{t('Prediction.recommendedPredictions')}</h6>
                             <hr />
-                            {isLoading ? [...Array(20)].map(x => <PredictionCard key={x} predictionId={''} title={''} dueDate={''} />)
+                            {isLoading ? [...Array(20)].map((x,index) => <PredictionCard key={index} predictionId={''} title={''} dueDate={''} />)
                             : recommendedPredictions.map(prediction=> <PredictionCard key={prediction.id} predictionId={prediction.id} title={prediction.name} dueDate={prediction.dueDate} />)
                             }
                         </div>
