@@ -48,6 +48,7 @@ app.use(express.static(path.join(__dirname, '/../client/build')));
 // Direct other requests to the auth router
 
 routes.loginRoutes(app);
+routes.predictionRoutes(app);
 
 
 //use this comment if any synchronization needed
@@ -56,6 +57,8 @@ routes.loginRoutes(app);
 // Be careful !! while using db.connection.sync({force: true}) because it will remove all contents from the all tables
 db.connection.sync({ force: false })
 
+// require('./app/models/init_db/init_predictions')()
+// require('./app/models/init_db/init_prediction_options')()
 
 server.listen(process.env.PORT || 8080, () => {
     console.log('listening...')

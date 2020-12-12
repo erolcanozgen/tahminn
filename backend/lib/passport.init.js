@@ -11,6 +11,7 @@ module.exports = () => {
     // Allowing passport to serialize and deserialize users into sessions
     passport.serializeUser((user, cb) => {
         let _isFirstLogin = true;
+        let id;
         switch (user.provider) {
             case 'google':
                 db.google_account.findByPk(user.id, {
@@ -23,11 +24,13 @@ module.exports = () => {
                     if (account) {
                         _isFirstLogin = false;
                         _name = account.user.username;
+                        id = account.user.id
                     }
                     else {
                         _name = user.displayName;
+                        id = user.id
                     }
-                    cb(null, { providerName: user.provider, id: user.id, name: _name, isFirstLogin: _isFirstLogin })
+                    cb(null, { providerName: user.provider, id: id, name: _name, isFirstLogin: _isFirstLogin })
                 });
                 break;
             case 'twitter':
@@ -45,7 +48,7 @@ module.exports = () => {
                     else {
                         _name = user.username;
                     }
-                    cb(null, { providerName: user.provider, id: user.id, name: _name, isFirstLogin: _isFirstLogin })
+                    cb(null, { providerName: user.provider, id: account.user.id, name: _name, isFirstLogin: _isFirstLogin })
                 });
                 break;
 

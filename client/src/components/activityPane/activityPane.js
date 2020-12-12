@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import './activityPane.css'
-import ActivityTile from '../activityTile/activityTile'
+import ActivityTile from './activityTile/activityTile'
 
 class ActivityPane extends Component {
 
     render() {
-        const CreateActivityTiles = (activities, user) => activities.map(activity => <ActivityTile user={user} header={activity.header} desc={activity.desc}></ActivityTile>);
+        const CreateActivityTiles = (activities, user) => activities.map(activity => <ActivityTile key={activity.header} user={user} header={activity.header} desc={activity.desc}></ActivityTile>);
         
         let activityList = [
             {
@@ -25,15 +25,12 @@ class ActivityPane extends Component {
             name: 'John Doe'
         }
         return (
-            <div id="activity-pane" className="col-6 col-sm-4 col-md-3 d-none d-md-block">
                 <div className="row m-1">
                     <div className="row">
                         <h6 className="col-12 pl-2 font-weight-bold">Activity</h6>
                         {CreateActivityTiles(activityList, user)}
                     </div>
                 </div>
-            </div>
-
         )
     }
 }

@@ -1,0 +1,93 @@
+.prediction-detail {
+    border-radius: 8px;
+    border-style: solid;
+    border-color: #d0d0d0;
+    border-width: 1px;
+    background-color: #fff;
+}
+
+.prediction-detail-title {
+    opacity: 1;
+    background-color: #0D2E54;
+    color: #fff;
+    height: 75px;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    box-shadow: 0 0 0px 1px #0D2E54;
+}
+
+.prediction-detail-content {
+    opacity: 0;
+    animation: fade-in-upwards 120ms ease-in 0ms forwards;
+}
+
+.prediction-due-info{
+    text-align: center;
+    background-color: #1B998B;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 0px 5px #1B998B;
+}
+
+.btn-save{
+    background-color: #1B998B;
+    color: white;
+    transition: all 0.3s;
+}
+
+.btn-save:hover{
+    color: white;
+    background-color: #167c70;
+}
+
+.btn-save-saved, .btn-save-saved:hover{
+    background-color: #68c5ba;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+@keyframes fade-in-upwards{
+    from{
+        transform: translateY(10%);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.prediction-img{
+    max-width: 100px;
+    max-height: 100px;
+}
+.prediction-img-small{
+    max-height: 38px;
+    border-radius: 50%;
+}
+
+.option-check {
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    background-image:url( '../../../assets/icons/check_animation.png');
+    background-position: left;
+    background-repeat:no-repeat;
+    background-size:3000%;
+  }
+  
+  
+  .option-checked {
+    animation: option-check-burst .8s steps(29) 1 forwards;
+  }
+  
+  @keyframes option-check-burst {
+    from {background-position:left;}
+    to { background-position:right;}
+  }

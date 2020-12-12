@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import NavigationBar from '../navbar/navbar'
 import Dashboard from '../dashboard/dashboard'
 import Profile from '../profile/profile'
+import ActivityPane from '../activityPane/activityPane'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './layout.css'
+import Prediction from '../prediction/prediction'
+import PredictionDetails from '../prediction/predictionDetails/predictionDetails'
 
 class Layout extends Component {
 
@@ -12,10 +15,19 @@ class Layout extends Component {
             <div>
                 <NavigationBar user={this.props.user} ></NavigationBar>
                 <div className="container">
-                    <Switch>
-                        <Route path="/profile" component={() => <Profile user={this.props.user} />} />
-                        <Route path="/" component={Dashboard} />
-                    </Switch>
+                    <div className="row m-1 m-lg-0">
+                        <div className="col-12 col-lg-9 p-1" id="main-pane">
+                            <Switch>
+                                <Route path="/profile" component={() => <Profile user={this.props.user} />} />
+                                <Route path="/prediction/:predictionId" component={() => <PredictionDetails user={this.props.user} />} />
+                                <Route path="/prediction" component={() => <Prediction user={this.props.user} />} />
+                                <Route path="/" component={Dashboard} />
+                            </Switch>
+                        </div>
+                        <div className="d-none d-lg-block col-lg-3" id="activity-pane">
+                            <ActivityPane></ActivityPane>
+                        </div>
+                    </div>    
                 </div>
             </div>
         )

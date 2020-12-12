@@ -1,0 +1,13 @@
+{
+    "tr": {
+        "dueDateText": "Son Tarih",
+        "resultDateText": "Sonuç Tarihi",
+        "reward": "Ödül: {{points}} puan",
+        "savePredictionButton": "Tahminimi Kaydet",
+        "predictionRate": "Tahmin Oranı",
+        "option": "Aday",
+        "noRecommendedPredictionMessage": "İlgi alanlarına uyan herhangi bir tahmin bulamadık. İlgi alanlarını profilinden değiştirebilirsin. Bu sırada en son eklenen tahminlere göz atabilirsin.",
+        "latestPredictions": "En Güncel Tahminler",
+        "recommendedPredictions": "Sizin İçin Önerilenler"
+    }
+}

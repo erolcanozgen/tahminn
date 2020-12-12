@@ -1,0 +1,13 @@
+{
+    "en": {
+        "dueDateText": "Deadline",
+        "resultDateText": "Result Date",
+        "reward": "Reward: {{points}} points",
+        "savePredictionButton": "Save My Prediction",
+        "predictionRate": "Prediction Rate",
+        "option": "Option",
+        "noRecommendedPredictionMessage": "We could't find any predictions according to your interests. You can change your interests from your profile. Meanwhile you can take a look at the latest predictions down below.",
+        "latestPredictions": "Latest Predictions",
+        "recommendedPredictions": "Recommended For You"
+    }
+}

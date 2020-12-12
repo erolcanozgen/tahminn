@@ -1,0 +1,82 @@
+@media(min-width:576px) {
+    .prediction-card-subhead {
+        font-size: .8em;
+    }
+    .prediction-card-title {
+        font-size: 1em;
+    }
+}
+@media(min-width:992px) {
+    .prediction-card-subhead {
+        font-size: .875em;
+    }
+    .prediction-card-title {
+        font-size: 1.25em;
+    }
+}
+
+.prediction-card {
+    border-radius: 4px;
+    border-style: solid;
+    border-color: #d0d0d0;
+    border-width: 1px;
+    background-color: #fff;
+    transition-duration: 250ms;
+    padding-left: 15px;
+    padding-right: 15px;
+    cursor: pointer;
+}
+
+.prediction-card:hover {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.prediction-card:first-child {
+    padding-top: 15px;
+}
+
+.prediction-card:last-child {
+    padding-bottom: 15px;
+}
+
+.prediction-card-title {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    line-height: 2rem;
+    font-weight: 500;
+    letter-spacing: .0125em;
+    text-decoration: inherit;
+    text-transform: inherit;
+}
+.prediction-card-title-placeholder {
+    background-color: #d0d0d0;
+    width: 80%;
+    height: 2rem;
+}
+
+.prediction-card-subhead {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.25rem;
+    font-weight: 400;
+    letter-spacing: .0178571429em;
+    text-decoration: inherit;
+    text-transform: inherit;
+    opacity: .6;
+}
+
+.prediction-card-subhead-placeholder {
+    margin-top: 4px;
+    background-color: #d0d0d0;
+    width: 70%;
+    height: 1.25rem;
+}
+
+.recommended-prediction-warning{
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: gray;
+}

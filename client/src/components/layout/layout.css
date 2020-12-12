@@ -1,6 +1,6 @@
 body {
     background-color: #eeeeee;
-    font-family: sans-serif;
+    font-family: 'Open Sans';
 }
 
 h6 {
@@ -21,4 +21,9 @@ h6::after {
 	margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 50%;
+}
+
+#main-pane {
+    overflow-y: auto;
+    height: calc(100vh - 54px);
 }
