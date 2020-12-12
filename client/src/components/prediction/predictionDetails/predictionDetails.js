@@ -54,6 +54,7 @@ class PredictionDetails extends Component {
         }).then(res => {
             if(res.data.status == 'unauthorized'){
                 history.push('/login');
+                return;
             }
             $('.btn-save').addClass('btn-save-saved');
             $('.btn-save').addClass('disabled');
